@@ -1,0 +1,14 @@
+<div class="card w-96 bg-base-100 shadow-xl">
+  <div class="card-body">
+    <h2 class="card-title">{{ project?.name }}</h2>
+    <p>Tech Stack:</p>
+    <div class="flex items-center space-x-2">
+      <div *ngFor="let stack of project?.stack">
+        <img [src]="stack?.icon" [alt]="stack.label + ' Icon'" class="w-6 h-6">
+      </div>
+    </div>
+    <div class="card-actions justify-end">
+      <a class="btn btn-success" href="{{ project?.link }}">View Source Code</a>
+    </div>
+  </div>
+</div>

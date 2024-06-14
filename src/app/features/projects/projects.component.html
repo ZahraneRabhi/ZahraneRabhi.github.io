@@ -1,0 +1,13 @@
+<h1 class="text-center text-4xl font-bold">PROJECTS</h1>
+
+<div class="flex justify-center items-center mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+        
+        <div 
+        class="card bg-base-300 rounded-box"             
+        *ngFor="let project of projects"
+        ><app-card [project]="project"></app-card>
+        </div>
+    </div>
+</div>
+
