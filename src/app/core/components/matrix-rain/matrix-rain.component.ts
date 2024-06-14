@@ -40,11 +40,11 @@ export class MatrixRainComponent implements OnInit {
     this.drops = Array.from({ length: this.columns }, () => 1);
     this.draw();
   }
-
+  
   private resizeCanvas() {
     const canvas = this.canvasRef.nativeElement;
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width = 1920;
+    canvas.height = 1080;
     this.columns = canvas.width / this.fontSize;
     this.drops = Array.from({ length: this.columns }, () => 1);
   }
