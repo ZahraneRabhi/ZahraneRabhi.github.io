@@ -16,6 +16,10 @@ export class AboutComponent {
       "icon": "https://img.icons8.com/color/48/000000/angularjs.png",
       "label": "ANGULAR"
     },
+    {      
+      "icon": "https://static-00.iconduck.com/assets.00/cypress-icon-2048x2045-rgul477b.png",
+      "label": "CYPRESS"
+    },
     {
       "icon": "https://img.icons8.com/color/48/000000/typescript.png",
       "label": "TYPESCRIPT"
@@ -44,9 +48,6 @@ export class AboutComponent {
       "icon": "https://img.icons8.com/?size=100&id=laYYF3dV0Iew&format=png&color=000000",
       "label": "SQL Server"
     },
-    {      
-      "icon": "https://img.icons8.com/?size=100&id=piVHs2bMOs6P&format=png&color=000000",
-      "label": "LATEX"
-    },
+
   ];
 }
