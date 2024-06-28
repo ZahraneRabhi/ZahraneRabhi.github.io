@@ -41,12 +41,24 @@ export class AboutComponent {
       "label": "NUMPY"
     },
     {      
+      "icon": "https://img.icons8.com/?size=100&id=UGYn5TapNioV&format=png&color=000000",
+      "label": "PHP"
+    },
+    {      
+      "icon": "https://img.icons8.com/?size=100&id=hUvxmdu7Rloj&format=png&color=000000",
+      "label": "LARAVEL"
+    },
+    {      
       "icon": "https://img.icons8.com/?size=100&id=13679&format=png&color=000000",
       "label": "JAVA"
     },
     {      
       "icon": "https://img.icons8.com/?size=100&id=laYYF3dV0Iew&format=png&color=000000",
       "label": "SQL Server"
+    },
+    {      
+      "icon": "https://img.icons8.com/?size=100&id=VLKafOkk3sBX&format=png&color=000000",
+      "label": "Azure"
     },
 
   ];
