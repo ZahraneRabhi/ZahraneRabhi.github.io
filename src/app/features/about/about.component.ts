@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-  about: string = "With a background in Data Analysis, I've embarked on a new quest to sharpen my front-end skills, I am dedicated to crafting visually captivating and dynamic web applications. I believe in the idea that great design is not just about how something looks, but also about how it works and adapts to different mediums."
+  about_1: string = `With a solid background in Data Science, I've mastered cleaning and getting useful insights from complex datasets using Python, My expertise in statistical techniques and data visualization allows me to transform raw data into actionable intelligence ready to be fed to a ML model.`
+  about_2: string = `Now, I'm dedicated to sharpening my front-end skills to create visually captivating and dynamic web applications. I believe great design is about both aesthetics and functionality. My goal is to merge my analytical abilities with front-end technologies to build seamless, intuitive, and responsive user experiences.`
+ 
   stacks: any[] = [
     {
       "icon": "https://img.icons8.com/?size=100&id=52539&format=png&color=000000",
@@ -39,6 +41,10 @@ export class AboutComponent {
     {      
       "icon": "https://img.icons8.com/?size=100&id=aR9CXyMagKIS&format=png&color=000000",
       "label": "NUMPY"
+    },
+    {      
+      "icon": "https://logosdownload.com/logo/scikit-learn-logo-big.png",
+      "label": "SCIKIT-LEARN"
     },
     {      
       "icon": "https://img.icons8.com/?size=100&id=UGYn5TapNioV&format=png&color=000000",
