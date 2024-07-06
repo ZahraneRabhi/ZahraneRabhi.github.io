@@ -17,6 +17,9 @@ import { ModalComponentComponent } from './core/components/modal-component/modal
 import { ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './features/about/about.component';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { BlogSectionComponent } from './features/blog-section/blog-section.component';
+import { BlogCardComponent } from './core/components/blog-card/blog-card.component';
+import { BlogContentComponent } from './features/blog-content/blog-content.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { NotFoundComponent } from './core/components/not-found/not-found.compone
     ModalComponentComponent,
     AboutComponent,
     NotFoundComponent,
+    BlogSectionComponent,
+    BlogCardComponent,
+    BlogContentComponent,
   ],
   imports: [
     BrowserModule,
