@@ -1,7 +1,9 @@
 export class Project {
     name?: string;
-    stack?: Stack[]
+    description?: string;
+    stack?: Stack[];
     link?: string;
+    image?: string;
 }
 
 export class Stack {

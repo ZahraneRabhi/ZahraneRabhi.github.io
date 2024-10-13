@@ -1,13 +1,15 @@
-<h1 class="text-center text-4xl font-bold">PROJECTS</h1>
-
-<div class="flex justify-center items-center mb-10">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-        
-        <div 
-        class="card bg-base-300 rounded-box"             
+<div class="bg-gray-900 py-16 px-6" id="projects">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-extrabold text-white text-center mb-12">My Projects</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+        <app-card 
         *ngFor="let project of projects"
-        ><app-card [project]="project"></app-card>
-        </div>
+        [project]="project" 
+        ></app-card>
+        
+      </div>
     </div>
-</div>
-
+  </div>
+  

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   readonly linkedinUrl: string = "https://www.linkedin.com/in/zahranerabhi/";
+  
+  redirectToLinkedin() {
+    window.location.href = this.linkedinUrl;
+  }
 }

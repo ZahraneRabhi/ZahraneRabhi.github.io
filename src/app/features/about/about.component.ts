@@ -6,13 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-  about_1: string = `With a solid background in Data Science, I've mastered cleaning and getting useful insights from complex datasets using Python, My expertise in statistical techniques and data visualization allows me to transform raw data into actionable intelligence ready to be fed to a ML model.`
-  about_2: string = `Now, I'm dedicated to sharpening my front-end skills to create visually captivating and dynamic web applications. I believe great design is about both aesthetics and functionality. My goal is to merge my analytical abilities with front-end technologies to build seamless, intuitive, and responsive user experiences.`
+  about_1: string = `Web Developer, Data Science Enthusiast, & Occasional 3D Modeler`
+  about_2: string = `I’m a web developer by day and a data explorer by… also day😀. I love crafting smooth, responsive websites and digging into data to find stories and trends. And when I’m not doing that, you might catch me tinkering with 3D models just for fun!`
  
   stacks: any[] = [
     {
       "icon": "https://img.icons8.com/?size=100&id=52539&format=png&color=000000",
       "label": "GITHUB"
+    },
+    {
+      "icon": "https://img.icons8.com/?size=100&id=1BC75jFEBED6&format=png&color=000000",
+      "label": ".NET CORE"
     },
     {
       "icon": "https://img.icons8.com/color/48/000000/angularjs.png",

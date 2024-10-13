@@ -69,6 +69,6 @@ export class MatrixRainComponent implements OnInit {
       this.drops[i]++;
     }
 
-    setTimeout(() => requestAnimationFrame(() => this.draw()), 30);
+    setTimeout(() => requestAnimationFrame(() => this.draw()), 24);
   }
 }

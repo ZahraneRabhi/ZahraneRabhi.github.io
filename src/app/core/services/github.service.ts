@@ -12,14 +12,14 @@ export class GithubService {
     return this.http.get(`https://api.github.com/users/${username}`);
   }
 
-  getRepoCommits(reponame: string, username: string) {
-    return this.http.get(`https://api.github.com/repos/${username}/${reponame}/commits`);
-  }
-
   getRepos(username: string) {
     return this.http.get(`https://api.github.com/users/${username}/repos`);
   }  
 
+  getRepoCommits(reponame: string, username: string) {
+    return this.http.get(`https://api.github.com/repos/${username}/${reponame}/commits`);
+  }
+  
   getStars(reponame: string, username: string) {
     return this.http.get(`https://api.github.com/repos/${username}/${reponame}/stargazers`);
   }
