@@ -1,21 +1,95 @@
-<div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-  <img [src]="project?.image" alt="Project 1" class="w-full h-48 object-cover rounded-lg mb-4">
+<div class="matrix-card h-full flex flex-col">
+  <!-- Project thumbnail with overlay -->
+  <div class="relative h-48 overflow-hidden">
+    <!-- Scanning line effect -->
+    <div class="absolute inset-0 z-10 scan-line"></div>
+    
+    <!-- Matrix-style image overlay -->
+    <div class="absolute inset-0 bg-green-900/20 z-0"></div>
+    <div class="absolute inset-0 z-0 matrix-overlay opacity-20"></div>
+    
+    <!-- Project image -->
+    <img [src]="project?.image" [alt]="project?.name" class="w-full h-full object-cover brightness-75 contrast-125">
+    
+    <!-- Project label -->
+    <div class="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-2 border-t border-green-500/30">
+      <div class="flex items-center">
+        <span class="text-green-400 font-mono text-xs mr-2">$</span>
+        <span class="text-green-400 font-mono text-sm truncate">{{ project?.name }}</span>
+      </div>
+    </div>
+  </div>
   
-  <h3 class="text-2xl font-bold text-green-400 mb-4">{{ project?.name }}</h3>
-  <p class="text-gray-300 mb-6">
-    {{ project?.description }}
-  </p>
-
-  <a (click)="redirectToProject()" class="inline-block px-6 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 transition-colors duration-300 mb-4">
-    View Project
-  </a>
-  
-  <!-- Tech Stack Section -->
-  <div class="mt-4">
-    <h4 class="text-lg font-semibold text-white mb-2">Tech Stack:</h4>
-    <div class="flex space-x-4">
-      <img *ngFor="let stack of project?.stack"
-       [src]="stack.icon" alt="Angular" class="w-10 h-10">
+  <!-- Project content -->
+  <div class="p-4 flex-grow flex flex-col">
+    <!-- Terminal-style header -->
+    <div class="flex items-start mb-3">
+      <span class="text-green-400 font-mono text-sm mr-2">&gt;</span>
+      <h3 class="text-xl font-bold text-green-400 font-mono leading-tight">{{ project?.name }}</h3>
+    </div>
+    
+    <!-- Description with fixed height -->
+    <div class="mb-4 flex-grow">
+      <p class="text-green-300/80 font-mono text-sm leading-relaxed h-24 overflow-hidden">
+        {{ project?.description }}
+      </p>
+    </div>
+    
+    <!-- Tech stack section -->
+    <div class="mb-4 border-t border-green-500/20 pt-3">
+      <div class="flex items-center mb-2">
+        <span class="text-green-500/70 font-mono text-xs mr-2">// stack</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div *ngFor="let stack of project?.stack" class="flex items-center bg-black/50 px-2 py-1 rounded border border-green-500/20">
+          <img [src]="stack.icon" [alt]="stack.label" class="w-4 h-4 mr-1">
+          <span class="text-green-300/80 font-mono text-xs">{{ stack.label }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Action button -->
+    <div class="mt-auto">
+      <button 
+        (click)="redirectToProject()" 
+        class="w-full flex items-center justify-center gap-2 py-2 bg-black border border-green-500/30 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 transition-all duration-300"
+      >
+        <span>&gt; execute project</span>
+        <div class="w-1 h-4 bg-green-400 animate-pulse"></div>
+      </button>
     </div>
   </div>
 </div>
+
+<style>
+.matrix-overlay {
+  background-image: 
+    repeating-linear-gradient(
+      180deg,
+      transparent,
+      rgba(0, 255, 0, 0.05) 1px,
+      transparent 2px
+    );
+  background-size: 100% 2px;
+}
+
+.scan-line {
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 0, 0.15), transparent);
+  height: 10px;
+  width: 100%;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+.matrix-card:hover .scan-line {
+  opacity: 1;
+}
+</style>

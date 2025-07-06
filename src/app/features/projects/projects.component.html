@@ -1,15 +1,99 @@
-<div class="bg-gray-900 py-16 px-6" id="projects">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl font-extrabold text-white text-center mb-12">My Projects</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      
-        <app-card 
-        *ngFor="let project of projects"
-        [project]="project" 
-        ></app-card>
-        
+<div class="relative bg-black py-20 px-6 overflow-hidden" id="projects">
+  <!-- Matrix-style background -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/5 via-black to-green-900/5"></div>
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 75% 75%, #00ff0008 0%, transparent 50%);"></div>
+  </div>
+  
+  <div class="relative max-w-7xl mx-auto">
+    <!-- Matrix-themed Header Section -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center justify-center p-3 bg-green-500/10 border border-green-500/30 rounded-lg mb-6 backdrop-blur-sm">
+        <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+        </svg>
+      </div>
+      <h2 class="text-5xl md:text-6xl font-bold text-green-400 mb-4 font-mono tracking-wider">
+        <span class="inline-block animate-pulse">&gt;</span> PROJECTS.EXE
+      </h2>
+      <p class="text-green-300/80 text-lg max-w-2xl mx-auto leading-relaxed font-mono">
+        >> Executing digital solutions... Building the matrix of innovation
+      </p>
+      <div class="w-32 h-0.5 bg-green-400 mx-auto mt-6 animate-pulse"></div>
+    </div>
+
+    <!-- Matrix-style Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
+      <div 
+        *ngFor="let project of projects; let i = index" 
+        class="h-full group relative transform transition-all duration-300 hover:scale-105"
+        [style.animation-delay]="(i * 200) + 'ms'"
+        style="animation: matrixFadeIn 1s ease-out both"
+      >
+        <!-- Matrix Card Container -->
+        <div class="h-full relative bg-black/80 border border-green-500/30 rounded-lg overflow-hidden shadow-2xl group-hover:border-green-400/60 transition-all duration-300 backdrop-blur-sm">
+          <!-- Matrix glow effect -->
+          <div class="absolute inset-0 bg-green-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <!-- Scanning line effect -->
+          <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
+          
+          <!-- Content -->
+          <div class="relative z-10 h-full">
+            <app-card [project]="project"></app-card>
+          </div>
+          
+          <!-- Matrix corner brackets -->
+          <div class="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Matrix Terminal-style Call to Action -->
+    <div class="text-center mt-20">
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-black/50 border border-green-500/30 rounded text-green-400 hover:border-green-400/60 hover:bg-green-500/10 transition-all duration-300 cursor-pointer group font-mono">
+        <span class="text-sm">&gt; ./view_more_projects</span>
+        <span class="w-2 h-4 bg-green-400 animate-pulse"></span>
       </div>
     </div>
   </div>
+</div>
+
+<style>
+@keyframes matrixFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Matrix digital rain effect on cards */
+.group:hover::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.03) 50%, transparent 100%);
+  animation: matrixScan 3s ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes matrixScan {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+</style>
   
