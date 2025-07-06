@@ -37,7 +37,7 @@ export class MatrixRainComponent implements OnInit {
     this.resizeCanvas();
     window.addEventListener('resize', () => this.resizeCanvas());
     this.columns = this.canvasRef.nativeElement.width / this.fontSize;
-    this.drops = Array.from({ length: this.columns }, () => 1);
+    this.drops = Array.from({ length: this.columns }, () => Math.floor(Math.random() * -100));
     this.draw();
   }
   
@@ -46,7 +46,7 @@ export class MatrixRainComponent implements OnInit {
     canvas.width = 1920;
     canvas.height = 1080;
     this.columns = canvas.width / this.fontSize;
-    this.drops = Array.from({ length: this.columns }, () => 1);
+    this.drops = Array.from({ length: this.columns }, () => Math.floor(Math.random() * -100));
   }
 
   private draw() {
