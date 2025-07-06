@@ -22,21 +22,22 @@ export class AboutComponent {
       "icon": "https://img.icons8.com/color/48/000000/angularjs.png",
       "label": "ANGULAR"
     },
-    {      
-      "icon": "https://static-00.iconduck.com/assets.00/cypress-icon-2048x2045-rgul477b.png",
-      "label": "CYPRESS"
-    },
+
     {
       "icon": "https://img.icons8.com/color/48/000000/typescript.png",
       "label": "TYPESCRIPT"
     },
     {
-      "icon": "https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg",
-      "label": "TAILWIND"
+      "icon": "https://img.icons8.com/?size=100&id=4PiNHtUJVbLs&format=png&color=000000",
+      "label": "TAILWIND CSS"
     },
     {      
       "icon": "https://img.icons8.com/?size=100&id=13441&format=png&color=000000",
       "label": "PYTHON"
+    },
+    {      
+      "icon": "https://img.icons8.com/?size=100&id=n3QRpDA7KZ7P&format=png&color=000000",
+      "label": "TENSORFLOW"
     },
     {      
       "icon": "https://img.icons8.com/?size=100&id=xSkewUSqtErH&format=png&color=000000",
@@ -47,12 +48,8 @@ export class AboutComponent {
       "label": "NUMPY"
     },
     {      
-      "icon": "https://logosdownload.com/logo/scikit-learn-logo-big.png",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
       "label": "SCIKIT-LEARN"
-    },
-    {      
-      "icon": "https://img.icons8.com/?size=100&id=UGYn5TapNioV&format=png&color=000000",
-      "label": "PHP"
     },
     {      
       "icon": "https://img.icons8.com/?size=100&id=hUvxmdu7Rloj&format=png&color=000000",
@@ -70,6 +67,9 @@ export class AboutComponent {
       "icon": "https://img.icons8.com/?size=100&id=VLKafOkk3sBX&format=png&color=000000",
       "label": "Azure"
     },
-
+    {      
+      "icon": "https://img.icons8.com/?size=100&id=wU62u24brJ44&format=png&color=000000",
+      "label": "AWS"
+    },
   ];
 }
