@@ -5,6 +5,10 @@ import { NotFoundComponent } from './core/components/not-found/not-found.compone
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
+  { 
+    path: 'project/:id', 
+    loadChildren: () => import('./features/project-details/project-details.module').then(m => m.ProjectDetailsModule) 
+  },
   { path: '**', component: NotFoundComponent },
 ];
 

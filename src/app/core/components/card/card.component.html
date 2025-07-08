@@ -48,14 +48,21 @@
       </div>
     </div>
     
-    <!-- Action button -->
-    <div class="mt-auto">
+    <!-- Action buttons -->
+    <div class="mt-auto space-y-2">
       <button 
-        (click)="redirectToProject()" 
+        (click)="viewProjectDetails()" 
         class="w-full flex items-center justify-center gap-2 py-2 bg-black border border-green-500/30 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 transition-all duration-300"
       >
-        <span>&gt; execute project</span>
+        <span>&gt; view details</span>
         <div class="w-1 h-4 bg-green-400 animate-pulse"></div>
+      </button>
+      
+      <button 
+        (click)="redirectToProject()" 
+        class="w-full flex items-center justify-center gap-2 py-1 bg-transparent border border-green-500/20 text-green-400/70 font-mono text-xs rounded hover:border-green-400/40 hover:text-green-400 transition-all duration-300"
+      >
+        <span>&gt; source code</span>
       </button>
     </div>
   </div>

@@ -17,6 +17,7 @@ import { ModalComponentComponent } from './core/components/modal-component/modal
 import { ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './features/about/about.component';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { ProjectDetailsComponent } from './features/project-details/project-details.component';
 
 @NgModule({
   declarations: [

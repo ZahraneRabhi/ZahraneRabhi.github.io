@@ -1,0 +1,197 @@
+<div class="relative min-h-screen bg-black py-20 px-6 overflow-hidden">
+  <!-- Matrix-style background -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/5 via-black to-green-900/5"></div>
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 75% 75%, #00ff0008 0%, transparent 50%);"></div>
+  </div>
+  
+  <div class="relative max-w-7xl mx-auto">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex flex-col items-center justify-center h-96">
+      <div class="text-green-400 text-2xl font-mono animate-pulse mb-4">Loading project data...</div>
+      <div class="w-16 h-16 border-4 border-green-400 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+    
+    <!-- Error State -->
+    <div *ngIf="!loading && error" class="flex flex-col items-center justify-center h-96">
+      <div class="text-red-500 text-2xl font-mono mb-4">Error: Project not found</div>
+      <button 
+        (click)="goBack()" 
+        class="flex items-center gap-2 px-6 py-3 bg-black border border-green-500/30 text-green-400 font-mono text-lg rounded hover:bg-green-500/10 hover:border-green-400/60 transition-all duration-300"
+      >
+        <span>&gt; return.to.main()</span>
+      </button>
+    </div>
+    
+    <!-- Project Details Content -->
+    <div *ngIf="!loading && !error && project" class="animate-fadeIn">
+      <!-- Back Button -->
+      <div class="mb-8">
+        <button 
+          (click)="goBack()" 
+          class="inline-flex items-center gap-2 px-4 py-2 bg-black border border-green-500/30 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 hover:border-green-400/60 transition-all duration-300"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          <span>&gt; back</span>
+        </button>
+      </div>
+      
+      <!-- Project Header -->
+      <div class="bg-black/80 border border-green-500/30 rounded-lg p-8 mb-8 backdrop-blur-sm shadow-2xl relative overflow-hidden">
+        <!-- Matrix corner brackets -->
+        <div class="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-green-400/50"></div>
+        <div class="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-green-400/50"></div>
+        <div class="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-green-400/50"></div>
+        <div class="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-green-400/50"></div>
+        
+        <!-- Scanning line effect -->
+        <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent animate-pulse"></div>
+        
+        <div class="flex flex-col md:flex-row gap-8">
+          <!-- Project image -->
+          <div class="md:w-1/3">
+            <div class="relative rounded-lg overflow-hidden border border-green-500/30">
+              <div class="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black/60"></div>
+              <img [src]="project.image" [alt]="project.name" class="w-full h-full object-cover">
+            </div>
+          </div>
+          
+          <!-- Project info -->
+          <div class="md:w-2/3">
+            <h1 class="text-4xl md:text-5xl font-bold text-green-400 mb-4 font-mono tracking-wider">
+              <span class="inline-block animate-pulse">&gt;</span> {{ project.name }}
+            </h1>
+            
+            <div class="mb-6">
+              <p class="text-green-300/80 text-lg leading-relaxed font-mono">
+                {{ project.description }}
+              </p>
+            </div>
+            
+            <!-- Meta information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <!-- Category -->
+              <div class="flex items-center gap-2">
+                <span class="text-green-500/70 font-mono text-sm">// Category:</span>
+                <span class="text-green-400 font-mono">{{ project.category }}</span>
+              </div>
+              
+              <!-- Release date -->
+              <div class="flex items-center gap-2">
+                <span class="text-green-500/70 font-mono text-sm">// Release date:</span>
+                <span class="text-green-400 font-mono">{{ project.releaseDate }}</span>
+              </div>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="flex flex-wrap gap-4">
+              <button 
+                *ngIf="project.githubLink"
+                (click)="openLink(project.githubLink)"
+                class="flex items-center gap-2 px-4 py-2 bg-black border border-green-500/30 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 hover:border-green-400/60 transition-all duration-300"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>&gt; view.source</span>
+              </button>
+              
+              <button 
+                *ngIf="project.liveDemo"
+                (click)="openLink(project.liveDemo)"
+                class="flex items-center gap-2 px-4 py-2 bg-black border border-green-500/30 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 hover:border-green-400/60 transition-all duration-300"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+                <span>&gt; live.demo()</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tech Stack Section -->
+      <div class="bg-black/80 border border-green-500/30 rounded-lg p-8 mb-8 backdrop-blur-sm shadow-2xl relative">
+        <h2 class="text-2xl font-bold text-green-400 mb-6 font-mono">
+          <span class="text-green-500/70">//</span> Tech Stack
+        </h2>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div 
+            *ngFor="let tech of project.stack" 
+            class="group bg-black/60 border border-green-500/30 rounded-lg p-4 flex flex-col items-center justify-center hover:border-green-400/60 transition-all duration-300"
+          >
+            <img [src]="tech.icon" [alt]="tech.label" class="w-12 h-12 mb-3 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-green-400 font-mono text-sm">{{ tech.label }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Features -->
+      <div class="bg-black/80 border border-green-500/30 rounded-lg p-8 mb-8 backdrop-blur-sm shadow-2xl relative">
+        <h2 class="text-2xl font-bold text-green-400 mb-6 font-mono">
+          <span class="text-green-500/70">//</span> Features
+        </h2>
+        
+        <div class="border-l-2 border-green-500/50 pl-6">
+          <div class="space-y-4">
+            <div *ngFor="let feature of project.features; let i = index" class="flex items-baseline gap-3">
+              <span class="text-green-400 font-mono">{{i+1}}.</span>
+              <div class="text-green-300/80 font-mono">{{ feature }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Description -->
+      <div class="bg-black/80 border border-green-500/30 rounded-lg p-8 mb-8 backdrop-blur-sm shadow-2xl relative">
+        <h2 class="text-2xl font-bold text-green-400 mb-6 font-mono">
+          <span class="text-green-500/70">//</span> Project Details
+        </h2>
+        
+        <div class="text-green-300/80 font-mono leading-relaxed space-y-4">
+          <p>{{ project.longDescription }}</p>
+        </div>
+      </div>
+      
+      <!-- Screenshots Gallery -->
+      <div *ngIf="hasScreenshots" class="bg-black/80 border border-green-500/30 rounded-lg p-8 backdrop-blur-sm shadow-2xl relative">
+        <h2 class="text-2xl font-bold text-green-400 mb-6 font-mono">
+          <span class="text-green-500/70">//</span> Screenshots
+        </h2>
+        
+        <!-- Screenshot slider -->
+        <div class="relative">
+          <div class="w-full h-80 md:h-96 lg:h-[30rem] border border-green-500/30 rounded-lg overflow-hidden">
+            <img *ngIf="currentScreenshot" [src]="currentScreenshot" alt="Project screenshot" class="w-full h-full object-contain">
+          </div>
+          
+          <!-- Navigation controls -->
+          <div *ngIf="hasMultipleScreenshots" class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-between pointer-events-none">
+            <button 
+              (click)="goToPreviousScreenshot()"
+              class="pointer-events-auto w-10 h-10 rounded-full bg-black/50 border border-green-500/30 text-green-400 flex items-center justify-center hover:bg-green-500/10 transition-all duration-300"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            
+            <button 
+              (click)="goToNextScreenshot()"
+              class="pointer-events-auto w-10 h-10 rounded-full bg-black/50 border border-green-500/30 text-green-400 flex items-center justify-center hover:bg-green-500/10 transition-all duration-300"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+          
+          
+      </div>
+    </div>
+  </div>
+</div>
