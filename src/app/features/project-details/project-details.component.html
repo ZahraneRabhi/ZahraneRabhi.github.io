@@ -73,9 +73,15 @@
             <!-- Meta information -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <!-- Category -->
-              <div class="flex items-center gap-2">
-                <span class="text-green-500/70 font-mono text-sm">// Category:</span>
-                <span class="text-green-400 font-mono">{{ project.category }}</span>
+              <div class="flex items-start gap-2">
+                <span class="text-green-500/70 font-mono text-sm mt-1">// Category:</span>
+                <div class="flex flex-wrap gap-2">
+                  <span 
+                    *ngFor="let cat of project.category" 
+                    class="inline-flex items-center px-2 py-1 bg-green-500/10 border border-green-500/30 rounded text-green-400 font-mono text-xs hover:bg-green-500/20 transition-colors duration-300">
+                    {{ cat }}
+                  </span>
+                </div>
               </div>
               
               <!-- Release date -->
@@ -164,6 +170,7 @@
         </h2>
         
         <!-- Screenshot slider -->
+         
         <div class="relative">
           <div class="w-full h-80 md:h-96 lg:h-[30rem] border border-green-500/30 rounded-lg overflow-hidden">
             <img *ngIf="currentScreenshot" [src]="currentScreenshot" alt="Project screenshot" class="w-full h-full object-contain">
