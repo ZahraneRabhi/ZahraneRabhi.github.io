@@ -40,9 +40,11 @@ export class ProjectService {
       screenshots: [
         '/assets/projects/Wakalny/screenshots/home.png',
         '/assets/projects/Wakalny/screenshots/auth.png',
-        '/assets/projects/Wakalny/screenshots/menu.png',
+        '/assets/projects/Wakalny/screenshots/catalog.png',
+        '/assets/projects/Wakalny/screenshots/item-details.png',
+        '/assets/projects/Wakalny/screenshots/order.png',
         '/assets/projects/Wakalny/screenshots/profile.png',
-        '/assets/projects/Wakalny/screenshots/admin.png',
+        '/assets/projects/Wakalny/screenshots/register.png',
       ],
       githubLink: 'https://github.com/ZahraneRabhi/Restaurant.Backend',
       liveDemo: undefined,
