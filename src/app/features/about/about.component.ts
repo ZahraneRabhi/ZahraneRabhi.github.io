@@ -11,8 +11,16 @@ export class AboutComponent {
  
   stacks: any[] = [
     {
+      "icon": "https://img.icons8.com/?size=100&id=13441&format=png&color=000000",
+      "label": "PYTHON"
+    },
+    {
+      "icon": "https://img.icons8.com/?size=100&id=22813&format=png&color=000000",
+      "label": "DOCKER"
+    },
+    {
       "icon": "https://img.icons8.com/?size=100&id=52539&format=png&color=000000",
-      "label": "GITHUB"
+      "label": "GIT"
     },
     {
       "icon": "https://img.icons8.com/?size=100&id=1BC75jFEBED6&format=png&color=000000",
@@ -32,12 +40,8 @@ export class AboutComponent {
       "label": "TAILWIND CSS"
     },
     {      
-      "icon": "https://img.icons8.com/?size=100&id=13441&format=png&color=000000",
-      "label": "PYTHON"
-    },
-    {      
-      "icon": "https://img.icons8.com/?size=100&id=n3QRpDA7KZ7P&format=png&color=000000",
-      "label": "TENSORFLOW"
+      "icon": "https://img.icons8.com/?size=100&id=O6SWwpPIM0GB&format=png&color=000000",
+      "label": "PYTORCH"
     },
     {      
       "icon": "https://img.icons8.com/?size=100&id=xSkewUSqtErH&format=png&color=000000",
@@ -66,10 +70,6 @@ export class AboutComponent {
     {      
       "icon": "https://img.icons8.com/?size=100&id=VLKafOkk3sBX&format=png&color=000000",
       "label": "Azure"
-    },
-    {      
-      "icon": "https://img.icons8.com/?size=100&id=wU62u24brJ44&format=png&color=000000",
-      "label": "AWS"
-    },
+    }
   ];
 }
