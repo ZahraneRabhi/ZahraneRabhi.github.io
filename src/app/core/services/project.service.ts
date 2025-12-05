@@ -26,7 +26,7 @@ export class ProjectService {
       name: 'Wakalny',
       image: '/assets/projects/Wakalny/thumbnail.png',
       description:
-        'Clean architecture ASP.NET Core backend for restaurant management: Sentinemtn Analysis, Frequent Items Analysis, auth, menus, orders, reviews',
+        'Clean architecture ASP.NET Core backend for restaurant management: Sentiment Analysis, Frequent Items Analysis, Auth, Menus, Orders, Reviews',
       longDescription:
         'This is a modular, scalable backend system for a restaurant management application. It is built using ASP.NET Core and follows a clean architecture approach, separating concerns into Domain, Application, Infrastructure, Persistence, and API layers. The system supports user authentication, menu management, order processing, reviews, and more.',
       features: [
@@ -374,8 +374,6 @@ export class ProjectService {
         'ML pipeline templates',
         'Data science best practices',
         'Configurable project types',
-        'Docker integration',
-        'CI/CD pipeline templates',
       ],
       screenshots: ['/assets/ProjectThumbnails/ml-template.png'],
       githubLink: 'https://github.com/ZahraneRabhi/Python-Template-Generator',
@@ -389,34 +387,34 @@ export class ProjectService {
         },
       ],
     },
-    {
-      id: 'beautiful-terminal',
-      name: 'Beautiful Terminal',
-      image: '/assets/ProjectThumbnails/beautiful-terminal.png',
-      description:
-        'Enhanced terminal experience with beautiful themes and features',
-      longDescription:
-        'This project enhances the terminal experience with beautiful themes, custom prompts, and productivity features. It includes color schemes, status information, and customizable elements to make the command line more visually appealing and functional.',
-      features: [
-        'Custom terminal themes',
-        'Enhanced prompt design',
-        'Git integration',
-        'Status indicators',
-        'Performance optimizations',
-        'Cross-platform compatibility',
-      ],
-      screenshots: ['/assets/ProjectThumbnails/beautiful-terminal.png'],
-      githubLink: 'https://github.com/ZahraneRabhi/Beautiful-Terminal-',
-      liveDemo: undefined,
-      releaseDate: '2024-01-10',
-      category: ['Tools'],
-      stack: [
-        {
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/python/python-original.svg',
-          label: 'python',
-        },
-      ],
-    },
+    // {
+    //   id: 'beautiful-terminal',
+    //   name: 'Beautiful Terminal',
+    //   image: '/assets/ProjectThumbnails/beautiful-terminal.png',
+    //   description:
+    //     'Enhanced terminal experience with beautiful themes and features',
+    //   longDescription:
+    //     'This project enhances the terminal experience with beautiful themes, custom prompts, and productivity features. It includes color schemes, status information, and customizable elements to make the command line more visually appealing and functional.',
+    //   features: [
+    //     'Custom terminal themes',
+    //     'Enhanced prompt design',
+    //     'Git integration',
+    //     'Status indicators',
+    //     'Performance optimizations',
+    //     'Cross-platform compatibility',
+    //   ],
+    //   screenshots: ['/assets/ProjectThumbnails/beautiful-terminal.png'],
+    //   githubLink: 'https://github.com/ZahraneRabhi/Beautiful-Terminal-',
+    //   liveDemo: undefined,
+    //   releaseDate: '2024-01-10',
+    //   category: ['Tools'],
+    //   stack: [
+    //     {
+    //       icon: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/python/python-original.svg',
+    //       label: 'python',
+    //     },
+    //   ],
+    // },
   ];
 
   getProjects(): Observable<Project[]> {
