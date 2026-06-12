@@ -19,6 +19,7 @@ import { AboutComponent } from './features/about/about.component';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { ProjectDetailsComponent } from './features/project-details/project-details.component';
 import { NavComponent } from './core/components/nav/nav.component';
+import { VintageComponent } from './features/vintage/vintage.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NavComponent } from './core/components/nav/nav.component';
     AboutComponent,
     NotFoundComponent,
     NavComponent,
+    VintageComponent,
   ],
   imports: [
     BrowserModule,

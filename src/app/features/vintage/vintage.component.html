@@ -1,0 +1,84 @@
+<div class="page">
+
+  <p class="meta center">You are viewing the text-only edition of this site.
+    <button class="linklike" (click)="enterTheMatrix()">[ Enter the Matrix ]</button>
+  </p>
+
+  <hr>
+
+  <h1>ZAHRANE RABHI</h1>
+  <p class="subtitle">Full Stack Developer &middot; Generative AI &amp; NLP Engineer</p>
+
+  <p class="topnav">[ <a href="#about">ABOUT</a> | <a href="#projects">PROJECTS</a> | <a href="#stats">STATS</a> | <a href="#contact">CONTACT</a> ]</p>
+
+  <div class="ascii-divider">==========================================================</div>
+
+  <h2 id="about">1. ABOUT</h2>
+  <p>
+    Greetings, visitor. I am a Full Stack Developer and Generative AI / NLP
+    Engineer driven by curiosity and creativity. I craft digital experiences
+    and build intelligent, data-driven solutions that bridge innovation with
+    real-world impact.
+  </p>
+
+  <h3>Skills</h3>
+  <ul>
+    <li><b>Frontend:</b> Angular, TailwindCSS, TypeScript, JavaScript</li>
+    <li><b>Backend:</b> Python, C#, .NET Core</li>
+    <li><b>AI &amp; Data Science:</b> Python, PyTorch, SpaCy, Pandas, Scikit-learn</li>
+    <li><b>Databases:</b> SQL Server</li>
+    <li><b>DevOps:</b> Docker, CI/CD, Azure, Git</li>
+  </ul>
+
+  <div class="ascii-divider">==========================================================</div>
+
+  <h2 id="projects">2. PROJECTS</h2>
+  <p class="meta">A directory of selected works, most recent first.</p>
+
+  <dl>
+    <ng-container *ngFor="let project of projects">
+      <dt>&gt; {{ project.name }} <span class="meta">({{ project.releaseDate }})</span></dt>
+      <dd>
+        {{ project.description }}<br>
+        <span class="meta">Built with: {{ stackLabels(project) }}</span><br>
+        <a *ngIf="project.githubLink" [href]="project.githubLink" target="_blank">[source code]</a>
+        <a *ngIf="project.liveDemo" [href]="project.liveDemo" target="_blank">[live demo]</a>
+        <a [routerLink]="['/project', project.id]">[details]</a>
+      </dd>
+    </ng-container>
+  </dl>
+
+  <div class="ascii-divider">==========================================================</div>
+
+  <h2 id="stats">3. GITHUB STATISTICS</h2>
+
+  <table *ngIf="stats; else noStats">
+    <tr><th>Metric</th><th>Value</th></tr>
+    <tr><td>Public repositories</td><td>{{ stats.repoCount }}</td></tr>
+    <tr><td>Total commits</td><td>{{ stats.totalCommits }}</td></tr>
+    <tr><td>Stars received</td><td>{{ stats.totalStars }}</td></tr>
+    <tr><td>Followers</td><td>{{ stats.followers }}</td></tr>
+  </table>
+  <ng-template #noStats>
+    <p class="meta">Statistics temporarily unavailable. Please try again later.</p>
+  </ng-template>
+
+  <div class="ascii-divider">==========================================================</div>
+
+  <h2 id="contact">4. CONTACT</h2>
+  <ul>
+    <li>E-mail: <a href="mailto:ZahraneRabhi@outlook.com">ZahraneRabhi&#64;outlook.com</a></li>
+    <li>LinkedIn: <a href="https://linkedin.com/in/zahranerabhi" target="_blank">linkedin.com/in/zahranerabhi</a></li>
+    <li>GitHub: <a href="https://github.com/ZahraneRabhi" target="_blank">github.com/ZahraneRabhi</a></li>
+  </ul>
+
+  <hr>
+
+  <p class="footer">
+    Last updated: {{ today }}<br>
+    Best viewed with Netscape Navigator 4.0 at 800x600 resolution.<br>
+    &copy; 2026 Zahrane Rabhi. Hand-written HTML, no cookies, no trackers.<br>
+    <span class="blink">_</span>
+  </p>
+
+</div>

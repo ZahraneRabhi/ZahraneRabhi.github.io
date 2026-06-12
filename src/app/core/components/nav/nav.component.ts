@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +17,13 @@ export class NavComponent {
     { id: 'contact', label: 'contact' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private themeService: ThemeService) {}
+
+  switchToVintage() {
+    this.themeService.set('vintage');
+    this.closeMenu();
+    window.scrollTo(0, 0);
+  }
 
   @HostListener('window:scroll')
   onScroll() {
