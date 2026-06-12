@@ -25,18 +25,14 @@
     
     <!-- Project Details Content -->
     <div *ngIf="!loading && !error && project" class="animate-fadeIn">
-      <!-- Back Button -->
-      <div class="mb-8">
-        <button 
-          (click)="goBack()" 
-          class="inline-flex items-center gap-2 px-4 py-2 bg-black border border-green-500/30 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 hover:border-green-400/60 transition-all duration-300"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          <span>&gt; back</span>
-        </button>
-      </div>
+      <!-- Breadcrumb -->
+      <nav class="mb-8 flex items-center gap-2 font-mono text-sm">
+        <a routerLink="/" class="text-green-500/50 hover:text-green-400 transition-colors duration-200">home</a>
+        <span class="text-green-500/30">/</span>
+        <button (click)="goBack()" class="text-green-500/50 hover:text-green-400 transition-colors duration-200">projects</button>
+        <span class="text-green-500/30">/</span>
+        <span class="text-green-400">{{ project.name }}</span>
+      </nav>
       
       <!-- Project Header -->
       <div class="bg-black/80 border border-green-500/30 rounded-lg p-8 mb-8 backdrop-blur-sm shadow-2xl relative overflow-hidden">

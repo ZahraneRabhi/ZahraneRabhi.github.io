@@ -1350,6 +1350,11 @@
   resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
+"@emailjs/browser@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.npmjs.org/@emailjs/browser/-/browser-4.4.1.tgz"
+  integrity sha512-DGSlP9sPvyFba3to2A50kDtZ+pXVp/0rhmqs2LmbMS3I5J8FSOgLwzY2Xb4qfKlOVHh29EAutLYwe5yuEZmEFg==
+
 "@esbuild/linux-x64@0.18.17":
   version "0.18.17"
   resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.18.17.tgz"

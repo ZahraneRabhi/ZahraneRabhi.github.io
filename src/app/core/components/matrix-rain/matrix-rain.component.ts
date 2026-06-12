@@ -29,6 +29,7 @@ export class MatrixRainComponent implements OnInit {
   private drops: number[] = [];
 
   private characters = 'アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロンabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  private isVisible = true;
 
   constructor() { }
 
@@ -38,6 +39,19 @@ export class MatrixRainComponent implements OnInit {
     window.addEventListener('resize', () => this.resizeCanvas());
     this.columns = this.canvasRef.nativeElement.width / this.fontSize;
     this.drops = Array.from({ length: this.columns }, () => Math.floor(Math.random() * -100));
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = this.isVisible;
+        this.isVisible = entry.isIntersecting;
+        if (this.isVisible && !wasVisible) {
+          this.draw();
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(this.canvasRef.nativeElement);
+
     this.draw();
   }
   
@@ -50,6 +64,8 @@ export class MatrixRainComponent implements OnInit {
   }
 
   private draw() {
+    if (!this.isVisible) return;
+
     const canvas = this.canvasRef.nativeElement;
     this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
     this.ctx.fillRect(0, 0, canvas.width, canvas.height);

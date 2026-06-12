@@ -87,8 +87,8 @@
             <span class="text-green-400 font-mono text-sm">&gt;</span>
             <input #commandInput type="text"
               class="bg-transparent border-none text-green-400 font-mono text-sm focus:outline-none py-2 w-full"
-              placeholder="Type a command..."
-              (keyup.enter)="processCommand(commandInput.value); commandInput.value = ''" />
+              placeholder="Type a command... (↑↓ for history)"
+              (keydown)="onInputKeydown($event, commandInput)" />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project, ProjectService } from '../../core/services/project.service';
 
@@ -55,8 +55,15 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    if (!this.hasMultipleScreenshots) return;
+    if (event.key === 'ArrowLeft') this.goToPreviousScreenshot();
+    if (event.key === 'ArrowRight') this.goToNextScreenshot();
+  }
+
   goBack(): void {
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/']);
   }
 
   openLink(url: string): void {

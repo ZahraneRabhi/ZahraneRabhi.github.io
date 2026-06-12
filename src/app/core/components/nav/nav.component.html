@@ -1,0 +1,47 @@
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  [ngClass]="isScrolled ? 'bg-black shadow-lg border-b border-green-500/20' : ''"
+>
+
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <!-- Logo -->
+    <button (click)="scrollTo('hero')"
+      class="text-green-400 font-mono font-bold text-lg tracking-wider hover:text-green-300 transition-colors duration-200">
+      &gt; ZR<span class="animate-pulse">_</span>
+    </button>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      <button
+        *ngFor="let link of navLinks"
+        (click)="scrollTo(link.id)"
+        class="text-green-400/60 hover:text-green-400 font-mono text-sm transition-colors duration-200 relative group">
+        ./{{ link.label }}
+        <span class="absolute -bottom-0.5 left-0 w-0 h-px bg-green-400 group-hover:w-full transition-all duration-200"></span>
+      </button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button (click)="toggleMenu()"
+      class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 text-green-400">
+      <span class="block w-5 h-0.5 bg-green-400 transition-all duration-300 origin-center"
+        [class.rotate-45]="isMenuOpen" [class.translate-y-2]="isMenuOpen"></span>
+      <span class="block w-5 h-0.5 bg-green-400 transition-all duration-300"
+        [class.opacity-0]="isMenuOpen" [class.scale-x-0]="isMenuOpen"></span>
+      <span class="block w-5 h-0.5 bg-green-400 transition-all duration-300 origin-center"
+        [class.-rotate-45]="isMenuOpen" [class.-translate-y-2]="isMenuOpen"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div *ngIf="isMenuOpen"
+    class="md:hidden bg-black/95 border-b border-green-500/20 backdrop-blur-sm">
+    <div class="px-6 py-4 flex flex-col gap-1">
+      <button
+        *ngFor="let link of navLinks"
+        (click)="scrollTo(link.id)"
+        class="text-left text-green-400/70 hover:text-green-400 font-mono text-sm py-2.5 border-b border-green-500/10 last:border-0 transition-colors duration-200">
+        &gt; ./{{ link.label }}
+      </button>
+    </div>
+  </div>
+</nav>

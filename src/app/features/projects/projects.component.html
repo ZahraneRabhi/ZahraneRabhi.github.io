@@ -22,10 +22,23 @@
       <div class="w-32 h-0.5 bg-green-400 mx-auto mt-6 animate-pulse"></div>
     </div>
 
+    <!-- Filter Bar -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button
+        *ngFor="let filter of filters"
+        (click)="setFilter(filter)"
+        class="px-4 py-2 font-mono text-sm rounded border transition-all duration-200"
+        [ngClass]="activeFilter === filter
+          ? 'bg-green-500/20 border-green-400/60 text-green-400'
+          : 'bg-black/50 border-green-500/30 text-green-400/50 hover:text-green-400'">
+        {{ filter === 'All' ? '> ./all' : '> ' + filter.toLowerCase() }}
+      </button>
+    </div>
+
     <!-- Matrix-style Projects Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
-      <div 
-        *ngFor="let project of projects; let i = index" 
+      <div
+        *ngFor="let project of filteredProjects; let i = index" 
         class="h-full group relative transform transition-all duration-300 hover:scale-105"
         [style.animation-delay]="(i * 200) + 'ms'"
         style="animation: matrixFadeIn 1s ease-out both"

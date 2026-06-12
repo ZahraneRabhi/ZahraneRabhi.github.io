@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './features/about/about.component';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { ProjectDetailsComponent } from './features/project-details/project-details.component';
+import { NavComponent } from './core/components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProjectDetailsComponent } from './features/project-details/project-deta
     ModalComponentComponent,
     AboutComponent,
     NotFoundComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,

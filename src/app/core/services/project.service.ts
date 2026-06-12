@@ -22,6 +22,46 @@ export interface Project {
 export class ProjectService {
   private projects: Project[] = [
     {
+      id: 'hikma',
+      name: 'Hikma',
+      image: '/assets/projects/hikma/thumbnail.png',
+      description:
+        'Arabic NLP & Generative AI platform — intelligent text analysis, semantic search, and document understanding for Arabic and multilingual content.',
+      longDescription:
+        'Hikma (حكمة — Wisdom) is an NLP and Generative AI platform built to process, analyze, and extract meaning from Arabic and multilingual text. It combines fine-tuned transformer models with a retrieval-augmented generation (RAG) pipeline to deliver document summarization, semantic search, and named entity recognition at scale.',
+      features: [
+        'Arabic-first NLP processing pipeline',
+        'Retrieval-Augmented Generation (RAG) for document Q&A',
+        'Semantic search powered by vector embeddings',
+        'Named Entity Recognition (NER) with fine-tuned models',
+        'Document summarization with generative AI',
+        'FastAPI REST interface for seamless integration',
+      ],
+      screenshots: [],
+      githubLink: undefined,
+      liveDemo: undefined,
+      releaseDate: '2025-06-01',
+      category: ['AI/ML', 'NLP', 'Generative AI'],
+      stack: [
+        {
+          icon: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/python/python-original.svg',
+          label: 'Python',
+        },
+        {
+          icon: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/pytorch/pytorch-original.svg',
+          label: 'PyTorch',
+        },
+        {
+          icon: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/fastapi/fastapi-original.svg',
+          label: 'FastAPI',
+        },
+        {
+          icon: 'https://img.icons8.com/?size=100&id=xSkewUSqtErH&format=png&color=000000',
+          label: 'Pandas',
+        },
+      ],
+    },
+    {
       id: 'Wakalny',
       name: 'Wakalny',
       image: '/assets/projects/Wakalny/thumbnail.png',

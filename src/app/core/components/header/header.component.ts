@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewChecked, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewChecked, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 interface CommandLine {
@@ -11,22 +11,35 @@ interface CommandLine {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements AfterViewChecked {
+export class HeaderComponent implements OnInit, AfterViewChecked {
   readonly linkedinUrl: string = "https://www.linkedin.com/in/zahranerabhi/";
-  
+
   @ViewChild('terminalOutput') terminalOutput!: ElementRef;
   @ViewChild('commandInput') commandInput!: ElementRef;
-  
+
   commandHistory: CommandLine[] = [];
+  inputHistory: string[] = [];
+  historyIndex = -1;
+  private readonly INPUT_HISTORY_KEY = 'zr_terminal_history';
+
   private shouldScroll = true;
   private isUserScrolling = false;
   private scrollTimeout: any;
 
   constructor(
-    private sanitizer: DomSanitizer, 
+    private sanitizer: DomSanitizer,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef
   ) {}
+
+  ngOnInit(): void {
+    try {
+      const saved = localStorage.getItem(this.INPUT_HISTORY_KEY);
+      if (saved) this.inputHistory = JSON.parse(saved);
+    } catch {
+      this.inputHistory = [];
+    }
+  }
   
   redirectToLinkedin() {
     window.location.href = this.linkedinUrl;
@@ -62,9 +75,42 @@ export class HeaderComponent implements AfterViewChecked {
     }, 1000);
   }
   
+  onInputKeydown(event: KeyboardEvent, input: HTMLInputElement): void {
+    if (event.key === 'Enter') {
+      this.processCommand(input.value);
+      input.value = '';
+      this.historyIndex = -1;
+      return;
+    }
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (this.historyIndex < this.inputHistory.length - 1) {
+        this.historyIndex++;
+        input.value = this.inputHistory[this.historyIndex];
+      }
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (this.historyIndex > 0) {
+        this.historyIndex--;
+        input.value = this.inputHistory[this.historyIndex];
+      } else if (this.historyIndex === 0) {
+        this.historyIndex = -1;
+        input.value = '';
+      }
+    }
+  }
+
   processCommand(command: string): void {
     if (!command.trim()) return;
-    
+
+    this.inputHistory.unshift(command);
+    if (this.inputHistory.length > 50) this.inputHistory.pop();
+    this.historyIndex = -1;
+    try {
+      localStorage.setItem(this.INPUT_HISTORY_KEY, JSON.stringify(this.inputHistory));
+    } catch { }
+
     // Add the command to history
     this.commandHistory.push({ text: command, isCommand: true });
     
