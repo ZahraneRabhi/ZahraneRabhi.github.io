@@ -5,26 +5,40 @@
   </div>
 
   <div class="relative">
-    <!-- Matrix-style header -->
+    <!-- Header -->
     <div class="text-center mb-16">
       <div class="inline-flex items-center gap-3 mb-4">
         <span class="text-green-400 font-mono text-xl animate-pulse">&gt;</span>
         <h1 class="text-4xl font-bold text-green-400 font-mono tracking-wider">GITHUB.MATRIX</h1>
         <div class="w-3 h-5 bg-green-400 animate-pulse"></div>
       </div>
-      <p class="text-green-300/70 font-mono">// System performance metrics loaded</p>
+      <p class="text-green-300/70 font-mono text-sm">// System performance metrics</p>
     </div>
 
-    <!-- Matrix-style stats grid -->
-    <div class="flex justify-center items-center mb-4">
-      <div class="w-full max-w-6xl">
+    <!-- Loading -->
+    <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-16 gap-4">
+      <div class="text-green-400 font-mono text-sm animate-pulse">&gt; fetching github.stats()...</div>
+      <div class="w-8 h-8 border-2 border-green-400 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Error state (no cache, no network) -->
+    <div *ngIf="!isLoading && loadError && !stats" class="text-center py-8">
+      <div class="inline-flex items-center gap-2 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded font-mono text-red-400 text-sm">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+        </svg>
+        <span>&gt; API unavailable — no cached data found</span>
+      </div>
+    </div>
+
+    <!-- Stats grid -->
+    <div *ngIf="!isLoading && stats" class="flex justify-center items-center">
+      <div class="w-full max-w-6xl px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <!-- Repositories Stat -->
-          <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300" *ngIf="repositories">
-            <!-- Scanning line -->
+
+          <!-- Repositories -->
+          <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300">
             <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-            
             <div class="text-center">
               <div class="flex justify-center mb-3">
                 <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,116 +46,101 @@
                 </svg>
               </div>
               <div class="text-green-500/70 font-mono text-sm mb-1">REPOSITORIES</div>
-              <div class="text-3xl font-bold text-green-400 font-mono">{{ repositories.length }}</div>
+              <div class="text-3xl font-bold text-green-400 font-mono">{{ stats.repoCount }}</div>
               <div class="text-green-300/60 font-mono text-xs mt-1">public instances</div>
             </div>
-            
-            <!-- Corner brackets -->
             <div class="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
 
-          <!-- Commits Stat -->
-          <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300" *ngIf="commits">
+          <!-- Stars -->
+          <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300">
             <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-            
             <div class="text-center">
               <div class="flex justify-center mb-3">
-                <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                </svg>
-              </div>
-              <div class="text-green-500/70 font-mono text-sm mb-1">COMMITS</div>
-              <div class="text-3xl font-bold text-green-400 font-mono">{{ commits.length }}</div>
-              <div class="text-green-300/60 font-mono text-xs mt-1">code executions</div>
-            </div>
-            
-            <div class="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-            
-          <!-- Stars Stat -->
-          <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300" *ngIf="stargazers">
-            <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-            
-            <div class="text-center">
-              <div class="flex justify-center mb-3">
-                <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
               </div>
               <div class="text-green-500/70 font-mono text-sm mb-1">STARS</div>
-              <div class="text-3xl font-bold text-green-400 font-mono">{{ stargazers.length }}</div>
+              <div class="text-3xl font-bold text-green-400 font-mono">{{ stats.totalStars }}</div>
               <div class="text-green-300/60 font-mono text-xs mt-1">achievement points</div>
             </div>
-            
             <div class="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-            
-          <!-- Profile Stat -->
+
+          <!-- Forks -->
           <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300">
             <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-            
+            <div class="text-center">
+              <div class="flex justify-center mb-3">
+                <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <circle cx="12" cy="5" r="2"></circle>
+                  <circle cx="5" cy="19" r="2"></circle>
+                  <circle cx="19" cy="19" r="2"></circle>
+                  <path d="M12 7v4M5 17v-2a4 4 0 014-4h6a4 4 0 014 4v2"></path>
+                </svg>
+              </div>
+              <div class="text-green-500/70 font-mono text-sm mb-1">FORKS</div>
+              <div class="text-3xl font-bold text-green-400 font-mono">{{ stats.totalForks }}</div>
+              <div class="text-green-300/60 font-mono text-xs mt-1">network branches</div>
+            </div>
+            <div class="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+
+          <!-- Profile / Followers -->
+          <div class="group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300">
+            <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
             <div class="text-center">
               <div class="flex justify-center mb-3">
                 <div class="relative">
-                  <div class="w-12 h-12 rounded-full border-2 border-green-400 overflow-hidden">
-                    <img *ngIf="avatarUrl" [src]="avatarUrl" alt="Profile Picture" class="w-full h-full object-cover" />
+                  <div class="w-12 h-12 rounded-full border-2 border-green-400 overflow-hidden bg-green-500/10">
+                    <img *ngIf="stats.avatarUrl" [src]="stats.avatarUrl" alt="GitHub avatar" class="w-full h-full object-cover" />
                   </div>
-                  <!-- Online indicator -->
                   <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse border-2 border-black"></div>
                 </div>
               </div>
-              <div class="text-green-500/70 font-mono text-sm mb-1">USER</div>
-              <div class="text-lg font-bold text-green-400 font-mono">ZAHRANE</div>
-              <div class="text-green-300/60 font-mono text-xs mt-1">system.admin</div>
+              <div class="text-green-500/70 font-mono text-sm mb-1">FOLLOWERS</div>
+              <div class="text-3xl font-bold text-green-400 font-mono">{{ stats.followers }}</div>
+              <div class="text-green-300/60 font-mono text-xs mt-1">{{ stats.login }}</div>
             </div>
-            
             <div class="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-green-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          
+
         </div>
-      </div>
-    </div>
-    
-    <!-- Matrix terminal status -->      <!-- Status indicators and refresh button -->
-      <div class="text-center mt-8 space-y-2">
-        <!-- Loading state -->
-        <div *ngIf="isLoading" class="inline-flex items-center gap-2 text-green-400/70 font-mono text-sm">
-          <span>&gt; stats.reload() processing</span>
-          <div class="w-2 h-3 bg-green-400 animate-pulse"></div>
-        </div>
-        
-        <!-- API Limit Reached Warning -->
-        <div *ngIf="apiLimitReached" class="bg-black/60 border border-amber-500/30 px-4 py-2 rounded-lg inline-block">
-          <div class="flex items-center gap-2 text-amber-400 font-mono text-sm">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+
+        <!-- Cache status bar -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <!-- Cache badge -->
+          <div *ngIf="isFromCache"
+            class="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70">
+            <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
             </svg>
-            <span>API rate limit reached. Showing cached data.</span>
+            <span>&gt; serving from cache — {{ cacheAge }}</span>
           </div>
-        </div>
-        
-        <!-- Last updated time -->
-        <div class="text-green-400/50 font-mono text-xs">
-          Last updated: {{ lastUpdated }}
-        </div>
-        
-        <!-- Refresh button -->
-        <div class="mt-4">
-          <button 
-            (click)="forceRefresh()" 
-            class="inline-flex items-center gap-2 px-4 py-1 bg-black/60 border border-green-500/30 rounded text-green-400 hover:bg-green-500/10 transition-all duration-300 font-mono text-sm"
-            [disabled]="isLoading"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+
+          <!-- Live badge -->
+          <div *ngIf="!isFromCache"
+            class="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70">
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span>&gt; live data fetched</span>
+          </div>
+
+          <!-- Refresh button -->
+          <button (click)="refresh()" [disabled]="isRefreshing"
+            class="inline-flex items-center gap-2 px-4 py-1.5 bg-black/60 border border-green-500/30 rounded text-green-400/70 hover:text-green-400 hover:bg-green-500/10 transition-all duration-300 font-mono text-xs disabled:opacity-40 disabled:cursor-not-allowed">
+            <svg class="w-3 h-3" [class.animate-spin]="isRefreshing" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
             </svg>
-            <span>&gt; stats.forceRefresh()</span>
+            <span>{{ isRefreshing ? 'refreshing...' : '> force refresh' }}</span>
           </button>
         </div>
+
       </div>
+    </div>
   </div>
 </div>

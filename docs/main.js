@@ -1242,10 +1242,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GithubService: () => (/* binding */ GithubService)
 /* harmony export */ });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 4980);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 3738);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 4300);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 2389);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 1699);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ 4860);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 9736);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 1699);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ 4860);
 
 
 
@@ -1253,99 +1254,65 @@ __webpack_require__.r(__webpack_exports__);
 class GithubService {
   constructor(http) {
     this.http = http;
-    this.cacheTime = 24 * 60 * 60 * 1000; // 24 hours cache duration
-    this.cachePrefix = 'github_cache_';
+    this.CACHE_KEY = 'github_stats_v2';
+    // 7-day TTL — portfolio stats don't change minute to minute
+    this.CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
   }
-  getData(username) {
-    const cacheKey = `${this.cachePrefix}user_${username}`;
-    const cachedData = this.getFromCache(cacheKey);
-    if (cachedData) {
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(cachedData);
-    }
-    return this.http.get(`https://api.github.com/users/${username}`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.tap)(data => this.saveToCache(cacheKey, data)));
+  // Only 2 API calls: user profile + repos list.
+  // Stars and forks are derived from the repos response (repo.stargazers_count,
+  // repo.forks_count), so zero extra per-repo requests are needed.
+  getStats(username) {
+    const cached = this.readCache();
+    if (cached) return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(cached);
+    return this.fetchFromApi(username);
   }
-  getRepos(username) {
-    const cacheKey = `${this.cachePrefix}repos_${username}`;
-    const cachedData = this.getFromCache(cacheKey);
-    if (cachedData) {
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(cachedData);
-    }
-    return this.http.get(`https://api.github.com/users/${username}/repos`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.tap)(data => this.saveToCache(cacheKey, data)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-      console.error('API error for repos:', error);
-      // Return cached data even if expired, or empty array if nothing is cached
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(this.getFromCache(cacheKey, true) || []);
-    }));
+  forceRefresh(username) {
+    localStorage.removeItem(this.CACHE_KEY);
+    return this.fetchFromApi(username);
   }
-  getRepoCommits(reponame, username) {
-    const cacheKey = `${this.cachePrefix}commits_${username}_${reponame}`;
-    const cachedData = this.getFromCache(cacheKey);
-    if (cachedData) {
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(cachedData);
-    }
-    return this.http.get(`https://api.github.com/repos/${username}/${reponame}/commits`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.tap)(data => this.saveToCache(cacheKey, data)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-      console.error(`API error for commits in ${reponame}:`, error);
-      // Return cached data even if expired, or empty array if nothing is cached
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(this.getFromCache(cacheKey, true) || []);
-    }));
-  }
-  getStars(reponame, username) {
-    const cacheKey = `${this.cachePrefix}stars_${username}_${reponame}`;
-    const cachedData = this.getFromCache(cacheKey);
-    if (cachedData) {
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(cachedData);
-    }
-    return this.http.get(`https://api.github.com/repos/${username}/${reponame}/stargazers`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.tap)(data => this.saveToCache(cacheKey, data)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-      console.error(`API error for stars in ${reponame}:`, error);
-      // Return cached data even if expired, or empty array if nothing is cached
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(this.getFromCache(cacheKey, true) || []);
-    }));
-  }
-  // Cache helpers
-  saveToCache(key, data) {
-    try {
-      const cacheItem = {
-        timestamp: new Date().getTime(),
-        data: data
+  fetchFromApi(username) {
+    return (0,rxjs__WEBPACK_IMPORTED_MODULE_1__.forkJoin)({
+      user: this.http.get(`https://api.github.com/users/${username}`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(null))),
+      repos: this.http.get(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)([])))
+    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(({
+      user,
+      repos
+    }) => {
+      const repoList = Array.isArray(repos) ? repos : [];
+      if (!user && !repoList.length) return null;
+      const stats = {
+        repoCount: user?.public_repos ?? repoList.length,
+        totalStars: repoList.reduce((sum, r) => sum + (r.stargazers_count || 0), 0),
+        totalForks: repoList.reduce((sum, r) => sum + (r.forks_count || 0), 0),
+        followers: user?.followers ?? 0,
+        avatarUrl: user?.avatar_url ?? '',
+        login: user?.login ?? username,
+        cachedAt: Date.now()
       };
-      localStorage.setItem(key, JSON.stringify(cacheItem));
-    } catch (e) {
-      console.error('Error saving to cache:', e);
-    }
+      this.writeCache(stats);
+      return stats;
+    }));
   }
-  getFromCache(key, ignoreExpiry = false) {
+  writeCache(stats) {
     try {
-      const cachedItem = localStorage.getItem(key);
-      if (!cachedItem) return null;
-      const {
-        timestamp,
-        data
-      } = JSON.parse(cachedItem);
-      const now = new Date().getTime();
-      if (ignoreExpiry || now - timestamp < this.cacheTime) {
-        return data;
-      }
-      return null;
-    } catch (e) {
-      console.error('Error retrieving from cache:', e);
+      localStorage.setItem(this.CACHE_KEY, JSON.stringify(stats));
+    } catch {}
+  }
+  readCache() {
+    try {
+      const raw = localStorage.getItem(this.CACHE_KEY);
+      if (!raw) return null;
+      const stats = JSON.parse(raw);
+      if (Date.now() - stats.cachedAt > this.CACHE_TTL) return null;
+      return stats;
+    } catch {
       return null;
     }
-  }
-  // Forces a refresh of all cached data
-  refreshAllData(username) {
-    this.getData(username).subscribe();
-    this.getRepos(username).subscribe(repos => {
-      if (repos && repos.length) {
-        repos.forEach(repo => {
-          this.getRepoCommits(repo.name, username).subscribe();
-          this.getStars(repo.name, username).subscribe();
-        });
-      }
-    });
   }
   static #_ = this.ɵfac = function GithubService_Factory(t) {
-    return new (t || GithubService)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient));
+    return new (t || GithubService)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_5__.HttpClient));
   };
-  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjectable"]({
+  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjectable"]({
     token: GithubService,
     factory: GithubService.ɵfac,
     providedIn: 'root'
@@ -2090,230 +2057,246 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   GithubStatsComponent: () => (/* binding */ GithubStatsComponent)
 /* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 4980);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 4300);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 2389);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 7474);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 1699);
-/* harmony import */ var _core_services_github_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../core/services/github.service */ 2989);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 6575);
+/* harmony import */ var _core_services_github_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/services/github.service */ 2989);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 6575);
 
 
 
-
-
-function GithubStatsComponent_div_16_Template(rf, ctx) {
+function GithubStatsComponent_div_13_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 16)(3, "div", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 13)(1, "div", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "> fetching github.stats()...");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "div", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+  }
+}
+function GithubStatsComponent_div_14_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 16)(1, "div", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "svg", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "path", 35);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "REPOSITORIES");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div", 36);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, "public instances");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "div", 24)(13, "div", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-  }
-  if (rf & 2) {
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r0.repositories.length);
-  }
-}
-function GithubStatsComponent_div_17_Template(rf, ctx) {
-  if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 16)(3, "div", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "svg", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "path", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "COMMITS");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div", 36);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, "code executions");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "div", 24)(13, "div", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-  }
-  if (rf & 2) {
-    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r1.commits.length);
-  }
-}
-function GithubStatsComponent_div_18_Template(rf, ctx) {
-  if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 16)(3, "div", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "svg", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "polygon", 38);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "STARS");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div", 36);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, "achievement points");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "div", 24)(13, "div", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-  }
-  if (rf & 2) {
-    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stargazers.length);
-  }
-}
-function GithubStatsComponent_img_25_Template(rf, ctx) {
-  if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "img", 39);
-  }
-  if (rf & 2) {
-    const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("src", ctx_r3.avatarUrl, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeUrl"]);
-  }
-}
-function GithubStatsComponent_div_36_Template(rf, ctx) {
-  if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 40)(1, "span");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "> stats.reload() processing");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "div", 41);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-  }
-}
-function GithubStatsComponent_div_37_Template(rf, ctx) {
-  if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 42)(1, "div", 43);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "svg", 32);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "path", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "svg", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "path", 19);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "span");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "API rate limit reached. Showing cached data.");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "> API unavailable \u2014 no cached data found");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
+  }
+}
+function GithubStatsComponent_div_15_img_54_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "img", 48);
+  }
+  if (rf & 2) {
+    const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("src", ctx_r3.stats.avatarUrl, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeUrl"]);
+  }
+}
+function GithubStatsComponent_div_15_div_65_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 49);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "svg", 50);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "path", 51);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+  }
+  if (rf & 2) {
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("> serving from cache \u2014 ", ctx_r4.cacheAge, "");
+  }
+}
+function GithubStatsComponent_div_15_div_66_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 49);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 52);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "> live data fetched");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+  }
+}
+function GithubStatsComponent_div_15_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 20)(1, "div", 21)(2, "div", 22)(3, "div", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](4, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "div", 25)(6, "div", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "svg", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](8, "path", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "REPOSITORIES");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](14, "public instances");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](15, "div", 32)(16, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "div", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](18, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "div", 25)(20, "div", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "svg", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](22, "polygon", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](24, "STARS");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, "achievement points");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](29, "div", 32)(30, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "div", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](32, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "div", 25)(34, "div", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "svg", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](36, "circle", 36)(37, "circle", 37)(38, "circle", 38)(39, "path", 39);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, "FORKS");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "div", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](44, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](45, "network branches");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](46, "div", 32)(47, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](48, "div", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](49, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](50, "div", 25)(51, "div", 26)(52, "div", 3)(53, "div", 40);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](54, GithubStatsComponent_div_15_img_54_Template, 1, 1, "img", 41);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](55, "div", 42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](56, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](57, "FOLLOWERS");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](58, "div", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](59);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](60, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](61);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](62, "div", 32)(63, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](64, "div", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](65, GithubStatsComponent_div_15_div_65_Template, 5, 1, "div", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](66, GithubStatsComponent_div_15_div_66_Template, 4, 0, "div", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](67, "button", 45);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function GithubStatsComponent_div_15_Template_button_click_67_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r7);
+      const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r6.refresh());
+    });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](68, "svg", 46);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](69, "path", 47);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](70, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](71);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()();
+  }
+  if (rf & 2) {
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.repoCount);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.totalStars);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.totalForks);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r2.stats.avatarUrl);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.followers);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.login);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r2.isFromCache);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx_r2.isFromCache);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx_r2.isRefreshing);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("animate-spin", ctx_r2.isRefreshing);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.isRefreshing ? "refreshing..." : "> force refresh");
   }
 }
 class GithubStatsComponent {
   constructor(githubService) {
     this.githubService = githubService;
-    this.avatarUrl = "";
-    this.repositories = [];
-    this.commits = [];
-    this.stargazers = [];
+    this.stats = null;
     this.isLoading = true;
-    this.apiLimitReached = false;
-    this.lastUpdated = '';
-    this.userName = "ZahraneRabhi";
-    this.cacheKey = 'github_stats_last_updated';
-  }
-  loadAllData() {
-    this.isLoading = true;
-    this.apiLimitReached = false;
-    // Get user profile data
-    this.githubService.getData(this.userName).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-      console.error('Error fetching GitHub user data:', error);
-      this.apiLimitReached = true;
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)(null);
-    })).subscribe(data => {
-      if (data) {
-        this.githubData = data;
-        this.avatarUrl = data.avatar_url;
-      }
-    });
-    // Get repositories and related data
-    this.githubService.getRepos(this.userName).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-      console.error('Error fetching repositories:', error);
-      this.apiLimitReached = true;
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)([]);
-    }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.finalize)(() => {
-      this.isLoading = false;
-      this.updateLastUpdatedTime();
-    })).subscribe(data => {
-      if (data && data.length) {
-        this.repositories = data;
-        this.getTotalCommits();
-        this.getStars();
-      }
-    });
-  }
-  getStars() {
-    if (this.repositories && this.repositories.length) {
-      this.stargazers = [];
-      // Create an array of observables for all star requests
-      const starRequests = this.repositories.map(repo => this.githubService.getStars(repo.name, this.userName).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-        console.warn(`Error fetching stars for ${repo.name}:`, error);
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)([]);
-      })));
-      // Execute all requests in parallel
-      (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.forkJoin)(starRequests).subscribe(results => {
-        results.forEach(stars => {
-          if (stars && stars.length) {
-            this.stargazers = [...this.stargazers, ...stars];
-          }
-        });
-      });
-    }
-  }
-  getTotalCommits() {
-    if (this.repositories && this.repositories.length) {
-      this.commits = [];
-      // Only fetch commits for the first 5 repos to avoid rate limiting
-      const reposToFetch = this.repositories.slice(0, 5);
-      // Create an array of observables for commit requests
-      const commitRequests = reposToFetch.map(repo => this.githubService.getRepoCommits(repo.name, this.userName).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(error => {
-        console.warn(`Error fetching commits for ${repo.name}:`, error);
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)([]);
-      })));
-      // Execute all requests in parallel
-      (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.forkJoin)(commitRequests).subscribe(results => {
-        results.forEach(commits => {
-          if (commits && commits.length) {
-            this.commits = [...this.commits, ...commits];
-          }
-        });
-      });
-    }
-  }
-  updateLastUpdatedTime() {
-    const now = new Date();
-    this.lastUpdated = now.toLocaleString();
-    localStorage.setItem(this.cacheKey, this.lastUpdated);
-  }
-  getLastUpdatedTime() {
-    const saved = localStorage.getItem(this.cacheKey);
-    return saved || 'Never';
-  }
-  forceRefresh() {
-    this.githubService.refreshAllData(this.userName);
-    this.loadAllData();
+    this.loadError = false;
+    this.isRefreshing = false;
+    this.username = 'ZahraneRabhi';
   }
   ngOnInit() {
-    this.lastUpdated = this.getLastUpdatedTime();
-    this.loadAllData();
+    this.load();
+  }
+  load() {
+    this.isLoading = true;
+    this.loadError = false;
+    this.githubService.getStats(this.username).subscribe({
+      next: data => {
+        this.stats = data;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.loadError = true;
+        this.isLoading = false;
+      }
+    });
+  }
+  refresh() {
+    this.isRefreshing = true;
+    this.githubService.forceRefresh(this.username).subscribe({
+      next: data => {
+        this.stats = data;
+        this.isRefreshing = false;
+      },
+      error: () => {
+        this.loadError = true;
+        this.isRefreshing = false;
+      }
+    });
+  }
+  get isFromCache() {
+    if (!this.stats) return false;
+    // If cachedAt is more than 5 seconds old it was loaded from storage, not just written
+    return Date.now() - this.stats.cachedAt > 5000;
+  }
+  get cacheAge() {
+    if (!this.stats) return '';
+    const ms = Date.now() - this.stats.cachedAt;
+    const minutes = Math.floor(ms / 60000);
+    const hours = Math.floor(ms / 3600000);
+    const days = Math.floor(hours / 24);
+    if (days > 0) return `${days}d ago`;
+    if (hours > 0) return `${hours}h ago`;
+    if (minutes > 0) return `${minutes}m ago`;
+    return 'just now';
   }
   static #_ = this.ɵfac = function GithubStatsComponent_Factory(t) {
     return new (t || GithubStatsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_core_services_github_service__WEBPACK_IMPORTED_MODULE_0__.GithubService));
@@ -2321,9 +2304,9 @@ class GithubStatsComponent {
   static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
     type: GithubStatsComponent,
     selectors: [["app-github-stats"]],
-    decls: 46,
-    vars: 8,
-    consts: [["id", "stats", 1, "relative", "bg-black", "py-16", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-20"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 20% 20%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 80% 80%, #00ff0008 0%, transparent 50%)"], [1, "relative"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "gap-3", "mb-4"], [1, "text-green-400", "font-mono", "text-xl", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "text-green-300/70", "font-mono"], [1, "flex", "justify-center", "items-center", "mb-4"], [1, "w-full", "max-w-6xl"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-4", "gap-6"], ["class", "group relative bg-black/80 border border-green-500/30 rounded-lg p-6 backdrop-blur-sm hover:border-green-400/60 transition-all duration-300", 4, "ngIf"], [1, "group", "relative", "bg-black/80", "border", "border-green-500/30", "rounded-lg", "p-6", "backdrop-blur-sm", "hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "text-center"], [1, "flex", "justify-center", "mb-3"], [1, "w-12", "h-12", "rounded-full", "border-2", "border-green-400", "overflow-hidden"], ["alt", "Profile Picture", "class", "w-full h-full object-cover", 3, "src", 4, "ngIf"], [1, "absolute", "-top-1", "-right-1", "w-4", "h-4", "bg-green-400", "rounded-full", "animate-pulse", "border-2", "border-black"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-1"], [1, "text-lg", "font-bold", "text-green-400", "font-mono"], [1, "text-green-300/60", "font-mono", "text-xs", "mt-1"], [1, "absolute", "top-1", "left-1", "w-3", "h-3", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-1", "right-1", "w-3", "h-3", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "text-center", "mt-8", "space-y-2"], ["class", "inline-flex items-center gap-2 text-green-400/70 font-mono text-sm", 4, "ngIf"], ["class", "bg-black/60 border border-amber-500/30 px-4 py-2 rounded-lg inline-block", 4, "ngIf"], [1, "text-green-400/50", "font-mono", "text-xs"], [1, "mt-4"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-1", "bg-black/60", "border", "border-green-500/30", "rounded", "text-green-400", "hover:bg-green-500/10", "transition-all", "duration-300", "font-mono", "text-sm", 3, "disabled", "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-10", "h-10", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"], [1, "text-3xl", "font-bold", "text-green-400", "font-mono"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"], ["points", "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"], ["alt", "Profile Picture", 1, "w-full", "h-full", "object-cover", 3, "src"], [1, "inline-flex", "items-center", "gap-2", "text-green-400/70", "font-mono", "text-sm"], [1, "w-2", "h-3", "bg-green-400", "animate-pulse"], [1, "bg-black/60", "border", "border-amber-500/30", "px-4", "py-2", "rounded-lg", "inline-block"], [1, "flex", "items-center", "gap-2", "text-amber-400", "font-mono", "text-sm"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"]],
+    decls: 16,
+    vars: 3,
+    consts: [["id", "stats", 1, "relative", "bg-black", "py-16", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-20"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 20% 20%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 80% 80%, #00ff0008 0%, transparent 50%)"], [1, "relative"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "gap-3", "mb-4"], [1, "text-green-400", "font-mono", "text-xl", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-sm"], ["class", "flex flex-col items-center justify-center py-16 gap-4", 4, "ngIf"], ["class", "text-center py-8", 4, "ngIf"], ["class", "flex justify-center items-center", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "justify-center", "py-16", "gap-4"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "w-8", "h-8", "border-2", "border-green-400", "border-t-transparent", "rounded-full", "animate-spin"], [1, "text-center", "py-8"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"], [1, "flex", "justify-center", "items-center"], [1, "w-full", "max-w-6xl", "px-6"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-4", "gap-6"], [1, "group", "relative", "bg-black/80", "border", "border-green-500/30", "rounded-lg", "p-6", "backdrop-blur-sm", "hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "text-center"], [1, "flex", "justify-center", "mb-3"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-10", "h-10", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-1"], [1, "text-3xl", "font-bold", "text-green-400", "font-mono"], [1, "text-green-300/60", "font-mono", "text-xs", "mt-1"], [1, "absolute", "top-1", "left-1", "w-3", "h-3", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-1", "right-1", "w-3", "h-3", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-10", "h-10", "text-green-400"], ["points", "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"], ["cx", "12", "cy", "5", "r", "2"], ["cx", "5", "cy", "19", "r", "2"], ["cx", "19", "cy", "19", "r", "2"], ["d", "M12 7v4M5 17v-2a4 4 0 014-4h6a4 4 0 014 4v2"], [1, "w-12", "h-12", "rounded-full", "border-2", "border-green-400", "overflow-hidden", "bg-green-500/10"], ["alt", "GitHub avatar", "class", "w-full h-full object-cover", 3, "src", 4, "ngIf"], [1, "absolute", "-top-1", "-right-1", "w-4", "h-4", "bg-green-400", "rounded-full", "animate-pulse", "border-2", "border-black"], [1, "mt-8", "flex", "flex-col", "sm:flex-row", "items-center", "justify-center", "gap-3"], ["class", "inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70", 4, "ngIf"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-1.5", "bg-black/60", "border", "border-green-500/30", "rounded", "text-green-400/70", "hover:text-green-400", "hover:bg-green-500/10", "transition-all", "duration-300", "font-mono", "text-xs", "disabled:opacity-40", "disabled:cursor-not-allowed", 3, "disabled", "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"], ["alt", "GitHub avatar", 1, "w-full", "h-full", "object-cover", 3, "src"], [1, "inline-flex", "items-center", "gap-2", "px-3", "py-1.5", "bg-green-500/10", "border", "border-green-500/20", "rounded", "font-mono", "text-xs", "text-green-400/70"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"], [1, "w-2", "h-2", "bg-green-400", "rounded-full", "animate-pulse"]],
     template: function GithubStatsComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
@@ -2338,69 +2321,23 @@ class GithubStatsComponent {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](10, "div", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "p", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "// System performance metrics loaded");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "// System performance metrics");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "div", 10)(14, "div", 11)(15, "div", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](16, GithubStatsComponent_div_16_Template, 14, 1, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](17, GithubStatsComponent_div_17_Template, 14, 1, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](18, GithubStatsComponent_div_18_Template, 14, 1, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "div", 14);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](20, "div", 15);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "div", 16)(22, "div", 17)(23, "div", 3)(24, "div", 18);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](25, GithubStatsComponent_img_25_Template, 1, 1, "img", 19);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](26, "div", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](13, GithubStatsComponent_div_13_Template, 4, 0, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](14, GithubStatsComponent_div_14_Template, 6, 0, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](15, GithubStatsComponent_div_15_Template, 72, 12, "div", 12);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "div", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, "USER");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "div", 22);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](30, "ZAHRANE");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "div", 23);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](32, "system.admin");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](33, "div", 24)(34, "div", 25);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 26);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](36, GithubStatsComponent_div_36_Template, 4, 0, "div", 27);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](37, GithubStatsComponent_div_37_Template, 6, 0, "div", 28);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](38, "div", 29);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](39);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "div", 30)(41, "button", 31);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function GithubStatsComponent_Template_button_click_41_listener() {
-          return ctx.forceRefresh();
-        });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "svg", 32);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](43, "path", 33);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](44, "span");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](45, "> stats.forceRefresh()");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()()();
       }
       if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](16);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.repositories);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.commits);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.stargazers);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.avatarUrl);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](13);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.isLoading);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.apiLimitReached);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" Last updated: ", ctx.lastUpdated, " ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.isLoading);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.isLoading && ctx.loadError && !ctx.stats);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.isLoading && ctx.stats);
       }
     },
-    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf],
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.NgIf],
     styles: ["/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnaXRodWItc3RhdHMuY29tcG9uZW50LmNzcyJ9 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvZmVhdHVyZXMvZ2l0aHViLXN0YXRzL2dpdGh1Yi1zdGF0cy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSx3S0FBd0siLCJzb3VyY2VSb290IjoiIn0= */"]
   });
 }

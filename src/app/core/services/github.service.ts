@@ -1,125 +1,94 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { Observable, of, forkJoin } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+export interface GitHubStats {
+  repoCount: number;
+  totalStars: number;
+  totalForks: number;
+  followers: number;
+  avatarUrl: string;
+  login: string;
+  cachedAt: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class GithubService {
-  private cacheTime = 24 * 60 * 60 * 1000; // 24 hours cache duration
-  private cachePrefix = 'github_cache_';
-  
+  private readonly CACHE_KEY = 'github_stats_v2';
+  // 7-day TTL — portfolio stats don't change minute to minute
+  private readonly CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+
   constructor(private http: HttpClient) {}
 
-  getData(username: string): Observable<any> {
-    const cacheKey = `${this.cachePrefix}user_${username}`;
-    const cachedData = this.getFromCache(cacheKey);
-    
-    if (cachedData) {
-      return of(cachedData);
-    }
-    
-    return this.http.get(`https://api.github.com/users/${username}`).pipe(
-      tap(data => this.saveToCache(cacheKey, data))
-    );
+  // Only 2 API calls: user profile + repos list.
+  // Stars and forks are derived from the repos response (repo.stargazers_count,
+  // repo.forks_count), so zero extra per-repo requests are needed.
+  getStats(username: string): Observable<GitHubStats | null> {
+    const cached = this.readCache();
+    if (cached) return of(cached);
+    return this.fetchFromApi(username);
   }
 
-  getRepos(username: string): Observable<any> {
-    const cacheKey = `${this.cachePrefix}repos_${username}`;
-    const cachedData = this.getFromCache(cacheKey);
-    
-    if (cachedData) {
-      return of(cachedData);
-    }
-    
-    return this.http.get(`https://api.github.com/users/${username}/repos`).pipe(
-      tap(data => this.saveToCache(cacheKey, data)),
-      catchError(error => {
-        console.error('API error for repos:', error);
-        // Return cached data even if expired, or empty array if nothing is cached
-        return of(this.getFromCache(cacheKey, true) || []);
-      })
-    );
-  }  
-
-  getRepoCommits(reponame: string, username: string): Observable<any> {
-    const cacheKey = `${this.cachePrefix}commits_${username}_${reponame}`;
-    const cachedData = this.getFromCache(cacheKey);
-    
-    if (cachedData) {
-      return of(cachedData);
-    }
-    
-    return this.http.get(`https://api.github.com/repos/${username}/${reponame}/commits`).pipe(
-      tap(data => this.saveToCache(cacheKey, data)),
-      catchError(error => {
-        console.error(`API error for commits in ${reponame}:`, error);
-        // Return cached data even if expired, or empty array if nothing is cached
-        return of(this.getFromCache(cacheKey, true) || []);
-      })
-    );
+  forceRefresh(username: string): Observable<GitHubStats | null> {
+    localStorage.removeItem(this.CACHE_KEY);
+    return this.fetchFromApi(username);
   }
-  
-  getStars(reponame: string, username: string): Observable<any> {
-    const cacheKey = `${this.cachePrefix}stars_${username}_${reponame}`;
-    const cachedData = this.getFromCache(cacheKey);
-    
-    if (cachedData) {
-      return of(cachedData);
-    }
-    
-    return this.http.get(`https://api.github.com/repos/${username}/${reponame}/stargazers`).pipe(
-      tap(data => this.saveToCache(cacheKey, data)),
-      catchError(error => {
-        console.error(`API error for stars in ${reponame}:`, error);
-        // Return cached data even if expired, or empty array if nothing is cached
-        return of(this.getFromCache(cacheKey, true) || []);
+
+  private fetchFromApi(username: string): Observable<GitHubStats | null> {
+    return forkJoin({
+      user: this.http
+        .get<any>(`https://api.github.com/users/${username}`)
+        .pipe(catchError(() => of(null))),
+      repos: this.http
+        .get<any[]>(
+          `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
+        )
+        .pipe(catchError(() => of([]))),
+    }).pipe(
+      map(({ user, repos }) => {
+        const repoList: any[] = Array.isArray(repos) ? repos : [];
+        if (!user && !repoList.length) return null;
+
+        const stats: GitHubStats = {
+          repoCount: user?.public_repos ?? repoList.length,
+          totalStars: repoList.reduce(
+            (sum: number, r: any) => sum + (r.stargazers_count || 0),
+            0
+          ),
+          totalForks: repoList.reduce(
+            (sum: number, r: any) => sum + (r.forks_count || 0),
+            0
+          ),
+          followers: user?.followers ?? 0,
+          avatarUrl: user?.avatar_url ?? '',
+          login: user?.login ?? username,
+          cachedAt: Date.now(),
+        };
+
+        this.writeCache(stats);
+        return stats;
       })
     );
   }
 
-  // Cache helpers
-  private saveToCache(key: string, data: any): void {
+  private writeCache(stats: GitHubStats): void {
     try {
-      const cacheItem = {
-        timestamp: new Date().getTime(),
-        data: data
-      };
-      localStorage.setItem(key, JSON.stringify(cacheItem));
-    } catch (e) {
-      console.error('Error saving to cache:', e);
-    }
+      localStorage.setItem(this.CACHE_KEY, JSON.stringify(stats));
+    } catch {}
   }
 
-  private getFromCache(key: string, ignoreExpiry: boolean = false): any {
+  private readCache(): GitHubStats | null {
     try {
-      const cachedItem = localStorage.getItem(key);
-      if (!cachedItem) return null;
-      
-      const { timestamp, data } = JSON.parse(cachedItem);
-      const now = new Date().getTime();
-      
-      if (ignoreExpiry || now - timestamp < this.cacheTime) {
-        return data;
-      }
-      return null;
-    } catch (e) {
-      console.error('Error retrieving from cache:', e);
+      const raw = localStorage.getItem(this.CACHE_KEY);
+      if (!raw) return null;
+      const stats: GitHubStats = JSON.parse(raw);
+      if (Date.now() - stats.cachedAt > this.CACHE_TTL) return null;
+      return stats;
+    } catch {
       return null;
     }
-  }
-  
-  // Forces a refresh of all cached data
-  refreshAllData(username: string): void {
-    this.getData(username).subscribe();
-    this.getRepos(username).subscribe(repos => {
-      if (repos && repos.length) {
-        repos.forEach((repo: any) => {
-          this.getRepoCommits(repo.name, username).subscribe();
-          this.getStars(repo.name, username).subscribe();
-        });
-      }
-    });
   }
 }
