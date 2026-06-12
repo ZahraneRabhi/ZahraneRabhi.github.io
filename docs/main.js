@@ -1241,12 +1241,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   GithubService: () => (/* binding */ GithubService)
 /* harmony export */ });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 4860);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 4980);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 4300);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 2389);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 9736);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 1699);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ 4860);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 4300);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 2389);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 9736);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 1699);
+
 
 
 
@@ -1254,13 +1255,9 @@ __webpack_require__.r(__webpack_exports__);
 class GithubService {
   constructor(http) {
     this.http = http;
-    this.CACHE_KEY = 'github_stats_v2';
-    // 7-day TTL — portfolio stats don't change minute to minute
-    this.CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+    this.CACHE_KEY = 'github_stats_v3';
+    this.CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
   }
-  // Only 2 API calls: user profile + repos list.
-  // Stars and forks are derived from the repos response (repo.stargazers_count,
-  // repo.forks_count), so zero extra per-repo requests are needed.
   getStats(username) {
     const cached = this.readCache();
     if (cached) return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(cached);
@@ -1271,19 +1268,28 @@ class GithubService {
     return this.fetchFromApi(username);
   }
   fetchFromApi(username) {
-    return (0,rxjs__WEBPACK_IMPORTED_MODULE_1__.forkJoin)({
-      user: this.http.get(`https://api.github.com/users/${username}`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(null))),
-      repos: this.http.get(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)([])))
-    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(({
+    // The commits search API needs this preview header to return total_count
+    const searchHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
+      Accept: 'application/vnd.github.cloak-preview+json'
+    });
+    return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.forkJoin)({
+      user: this.http.get(`https://api.github.com/users/${username}`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(null))),
+      repos: this.http.get(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)([]))),
+      // per_page=1 → minimal payload; total_count gives the real commit count
+      commits: this.http.get(`https://api.github.com/search/commits?q=author:${username}&per_page=1`, {
+        headers: searchHeaders
+      }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.catchError)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.of)(null)))
+    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(({
       user,
-      repos
+      repos,
+      commits
     }) => {
       const repoList = Array.isArray(repos) ? repos : [];
       if (!user && !repoList.length) return null;
       const stats = {
         repoCount: user?.public_repos ?? repoList.length,
         totalStars: repoList.reduce((sum, r) => sum + (r.stargazers_count || 0), 0),
-        totalForks: repoList.reduce((sum, r) => sum + (r.forks_count || 0), 0),
+        totalCommits: commits?.total_count ?? 0,
         followers: user?.followers ?? 0,
         avatarUrl: user?.avatar_url ?? '',
         login: user?.login ?? username,
@@ -1310,9 +1316,9 @@ class GithubService {
     }
   }
   static #_ = this.ɵfac = function GithubService_Factory(t) {
-    return new (t || GithubService)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_5__.HttpClient));
+    return new (t || GithubService)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
   };
-  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjectable"]({
+  static #_2 = this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({
     token: GithubService,
     factory: GithubService.ɵfac,
     providedIn: 'root'
@@ -2087,7 +2093,7 @@ function GithubStatsComponent_div_14_Template(rf, ctx) {
 }
 function GithubStatsComponent_div_15_img_54_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "img", 48);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "img", 47);
   }
   if (rf & 2) {
     const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
@@ -2096,10 +2102,10 @@ function GithubStatsComponent_div_15_img_54_Template(rf, ctx) {
 }
 function GithubStatsComponent_div_15_div_65_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 49);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 48);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "svg", 50);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "path", 51);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "svg", 49);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "path", 50);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "span");
@@ -2114,8 +2120,8 @@ function GithubStatsComponent_div_15_div_65_Template(rf, ctx) {
 }
 function GithubStatsComponent_div_15_div_66_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 49);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 52);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 48);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 51);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "span");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "> live data fetched");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
@@ -2167,26 +2173,27 @@ function GithubStatsComponent_div_15_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "div", 25)(34, "div", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "svg", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](36, "circle", 36)(37, "circle", 37)(38, "circle", 38)(39, "path", 39);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](36, "circle", 36)(37, "line", 37)(38, "line", 38);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "div", 29);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, "FORKS");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](39, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](40, "COMMITS");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "div", 30);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](41, "div", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](43, "number");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](44, "div", 31);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](45, "network branches");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](45, "total pushes");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](46, "div", 32)(47, "div", 33);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](48, "div", 23);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](49, "div", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](50, "div", 25)(51, "div", 26)(52, "div", 3)(53, "div", 40);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](54, GithubStatsComponent_div_15_img_54_Template, 1, 1, "img", 41);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](50, "div", 25)(51, "div", 26)(52, "div", 3)(53, "div", 39);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](54, GithubStatsComponent_div_15_img_54_Template, 1, 1, "img", 40);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](55, "div", 42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](55, "div", 41);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](56, "div", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](57, "FOLLOWERS");
@@ -2199,18 +2206,18 @@ function GithubStatsComponent_div_15_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](62, "div", 32)(63, "div", 33);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](64, "div", 43);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](65, GithubStatsComponent_div_15_div_65_Template, 5, 1, "div", 44);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](66, GithubStatsComponent_div_15_div_66_Template, 4, 0, "div", 44);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](67, "button", 45);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](64, "div", 42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](65, GithubStatsComponent_div_15_div_65_Template, 5, 1, "div", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](66, GithubStatsComponent_div_15_div_66_Template, 4, 0, "div", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](67, "button", 44);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function GithubStatsComponent_div_15_Template_button_click_67_listener() {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r7);
       const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r6.refresh());
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](68, "svg", 46);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](69, "path", 47);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](68, "svg", 45);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](69, "path", 46);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](70, "span");
@@ -2223,9 +2230,9 @@ function GithubStatsComponent_div_15_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.repoCount);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](14);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.totalStars);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.totalForks);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipeBind1"](43, 12, ctx_r2.stats.totalCommits));
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](12);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r2.stats.avatarUrl);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.stats.followers);
@@ -2306,7 +2313,7 @@ class GithubStatsComponent {
     selectors: [["app-github-stats"]],
     decls: 16,
     vars: 3,
-    consts: [["id", "stats", 1, "relative", "bg-black", "py-16", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-20"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 20% 20%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 80% 80%, #00ff0008 0%, transparent 50%)"], [1, "relative"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "gap-3", "mb-4"], [1, "text-green-400", "font-mono", "text-xl", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-sm"], ["class", "flex flex-col items-center justify-center py-16 gap-4", 4, "ngIf"], ["class", "text-center py-8", 4, "ngIf"], ["class", "flex justify-center items-center", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "justify-center", "py-16", "gap-4"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "w-8", "h-8", "border-2", "border-green-400", "border-t-transparent", "rounded-full", "animate-spin"], [1, "text-center", "py-8"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"], [1, "flex", "justify-center", "items-center"], [1, "w-full", "max-w-6xl", "px-6"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-4", "gap-6"], [1, "group", "relative", "bg-black/80", "border", "border-green-500/30", "rounded-lg", "p-6", "backdrop-blur-sm", "hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "text-center"], [1, "flex", "justify-center", "mb-3"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-10", "h-10", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-1"], [1, "text-3xl", "font-bold", "text-green-400", "font-mono"], [1, "text-green-300/60", "font-mono", "text-xs", "mt-1"], [1, "absolute", "top-1", "left-1", "w-3", "h-3", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-1", "right-1", "w-3", "h-3", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-10", "h-10", "text-green-400"], ["points", "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"], ["cx", "12", "cy", "5", "r", "2"], ["cx", "5", "cy", "19", "r", "2"], ["cx", "19", "cy", "19", "r", "2"], ["d", "M12 7v4M5 17v-2a4 4 0 014-4h6a4 4 0 014 4v2"], [1, "w-12", "h-12", "rounded-full", "border-2", "border-green-400", "overflow-hidden", "bg-green-500/10"], ["alt", "GitHub avatar", "class", "w-full h-full object-cover", 3, "src", 4, "ngIf"], [1, "absolute", "-top-1", "-right-1", "w-4", "h-4", "bg-green-400", "rounded-full", "animate-pulse", "border-2", "border-black"], [1, "mt-8", "flex", "flex-col", "sm:flex-row", "items-center", "justify-center", "gap-3"], ["class", "inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70", 4, "ngIf"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-1.5", "bg-black/60", "border", "border-green-500/30", "rounded", "text-green-400/70", "hover:text-green-400", "hover:bg-green-500/10", "transition-all", "duration-300", "font-mono", "text-xs", "disabled:opacity-40", "disabled:cursor-not-allowed", 3, "disabled", "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"], ["alt", "GitHub avatar", 1, "w-full", "h-full", "object-cover", 3, "src"], [1, "inline-flex", "items-center", "gap-2", "px-3", "py-1.5", "bg-green-500/10", "border", "border-green-500/20", "rounded", "font-mono", "text-xs", "text-green-400/70"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"], [1, "w-2", "h-2", "bg-green-400", "rounded-full", "animate-pulse"]],
+    consts: [["id", "stats", 1, "relative", "bg-black", "py-16", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-20"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 20% 20%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 80% 80%, #00ff0008 0%, transparent 50%)"], [1, "relative"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "gap-3", "mb-4"], [1, "text-green-400", "font-mono", "text-xl", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-sm"], ["class", "flex flex-col items-center justify-center py-16 gap-4", 4, "ngIf"], ["class", "text-center py-8", 4, "ngIf"], ["class", "flex justify-center items-center", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "justify-center", "py-16", "gap-4"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "w-8", "h-8", "border-2", "border-green-400", "border-t-transparent", "rounded-full", "animate-spin"], [1, "text-center", "py-8"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"], [1, "flex", "justify-center", "items-center"], [1, "w-full", "max-w-6xl", "px-6"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-4", "gap-6"], [1, "group", "relative", "bg-black/80", "border", "border-green-500/30", "rounded-lg", "p-6", "backdrop-blur-sm", "hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "text-center"], [1, "flex", "justify-center", "mb-3"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-10", "h-10", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-1"], [1, "text-3xl", "font-bold", "text-green-400", "font-mono"], [1, "text-green-300/60", "font-mono", "text-xs", "mt-1"], [1, "absolute", "top-1", "left-1", "w-3", "h-3", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-1", "right-1", "w-3", "h-3", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-10", "h-10", "text-green-400"], ["points", "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"], ["cx", "12", "cy", "12", "r", "3"], ["x1", "3", "y1", "12", "x2", "9", "y2", "12"], ["x1", "15", "y1", "12", "x2", "21", "y2", "12"], [1, "w-12", "h-12", "rounded-full", "border-2", "border-green-400", "overflow-hidden", "bg-green-500/10"], ["alt", "GitHub avatar", "class", "w-full h-full object-cover", 3, "src", 4, "ngIf"], [1, "absolute", "-top-1", "-right-1", "w-4", "h-4", "bg-green-400", "rounded-full", "animate-pulse", "border-2", "border-black"], [1, "mt-8", "flex", "flex-col", "sm:flex-row", "items-center", "justify-center", "gap-3"], ["class", "inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70", 4, "ngIf"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-1.5", "bg-black/60", "border", "border-green-500/30", "rounded", "text-green-400/70", "hover:text-green-400", "hover:bg-green-500/10", "transition-all", "duration-300", "font-mono", "text-xs", "disabled:opacity-40", "disabled:cursor-not-allowed", 3, "disabled", "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"], ["alt", "GitHub avatar", 1, "w-full", "h-full", "object-cover", 3, "src"], [1, "inline-flex", "items-center", "gap-2", "px-3", "py-1.5", "bg-green-500/10", "border", "border-green-500/20", "rounded", "font-mono", "text-xs", "text-green-400/70"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"], [1, "w-2", "h-2", "bg-green-400", "rounded-full", "animate-pulse"]],
     template: function GithubStatsComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
@@ -2325,7 +2332,7 @@ class GithubStatsComponent {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](13, GithubStatsComponent_div_13_Template, 4, 0, "div", 10);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](14, GithubStatsComponent_div_14_Template, 6, 0, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](15, GithubStatsComponent_div_15_Template, 72, 12, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](15, GithubStatsComponent_div_15_Template, 72, 14, "div", 12);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
       }
       if (rf & 2) {
@@ -2337,7 +2344,7 @@ class GithubStatsComponent {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.isLoading && ctx.stats);
       }
     },
-    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.NgIf],
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_2__.DecimalPipe],
     styles: ["/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnaXRodWItc3RhdHMuY29tcG9uZW50LmNzcyJ9 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvZmVhdHVyZXMvZ2l0aHViLXN0YXRzL2dpdGh1Yi1zdGF0cy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSx3S0FBd0siLCJzb3VyY2VSb290IjoiIn0= */"]
   });
 }

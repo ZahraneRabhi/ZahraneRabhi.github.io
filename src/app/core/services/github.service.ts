@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, forkJoin } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 export interface GitHubStats {
   repoCount: number;
   totalStars: number;
-  totalForks: number;
+  totalCommits: number;
   followers: number;
   avatarUrl: string;
   login: string;
@@ -17,15 +17,11 @@ export interface GitHubStats {
   providedIn: 'root'
 })
 export class GithubService {
-  private readonly CACHE_KEY = 'github_stats_v2';
-  // 7-day TTL — portfolio stats don't change minute to minute
-  private readonly CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+  private readonly CACHE_KEY = 'github_stats_v3';
+  private readonly CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
 
   constructor(private http: HttpClient) {}
 
-  // Only 2 API calls: user profile + repos list.
-  // Stars and forks are derived from the repos response (repo.stargazers_count,
-  // repo.forks_count), so zero extra per-repo requests are needed.
   getStats(username: string): Observable<GitHubStats | null> {
     const cached = this.readCache();
     if (cached) return of(cached);
@@ -38,17 +34,31 @@ export class GithubService {
   }
 
   private fetchFromApi(username: string): Observable<GitHubStats | null> {
+    // The commits search API needs this preview header to return total_count
+    const searchHeaders = new HttpHeaders({
+      Accept: 'application/vnd.github.cloak-preview+json',
+    });
+
     return forkJoin({
       user: this.http
         .get<any>(`https://api.github.com/users/${username}`)
         .pipe(catchError(() => of(null))),
+
       repos: this.http
         .get<any[]>(
           `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
         )
         .pipe(catchError(() => of([]))),
+
+      // per_page=1 → minimal payload; total_count gives the real commit count
+      commits: this.http
+        .get<any>(
+          `https://api.github.com/search/commits?q=author:${username}&per_page=1`,
+          { headers: searchHeaders }
+        )
+        .pipe(catchError(() => of(null))),
     }).pipe(
-      map(({ user, repos }) => {
+      map(({ user, repos, commits }) => {
         const repoList: any[] = Array.isArray(repos) ? repos : [];
         if (!user && !repoList.length) return null;
 
@@ -58,10 +68,7 @@ export class GithubService {
             (sum: number, r: any) => sum + (r.stargazers_count || 0),
             0
           ),
-          totalForks: repoList.reduce(
-            (sum: number, r: any) => sum + (r.forks_count || 0),
-            0
-          ),
+          totalCommits: commits?.total_count ?? 0,
           followers: user?.followers ?? 0,
           avatarUrl: user?.avatar_url ?? '',
           login: user?.login ?? username,
