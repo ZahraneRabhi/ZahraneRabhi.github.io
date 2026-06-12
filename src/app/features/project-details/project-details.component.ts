@@ -19,40 +19,41 @@ export class ProjectDetailsComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
+  get screenshots(): string[] {
+    return this.project?.screenshots ?? [];
+  }
+
   get hasScreenshots(): boolean {
-    return !!this.project?.screenshots?.length;
+    return this.screenshots.length > 0;
   }
 
   get hasMultipleScreenshots(): boolean {
-    return (this.project?.screenshots?.length ?? 0) > 1;
+    return this.screenshots.length > 1;
   }
 
   get currentScreenshot(): string | undefined {
-    return this.project?.screenshots?.[this.activeScreenshotIndex];
+    return this.screenshots[this.activeScreenshotIndex];
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     const projectId = this.route.snapshot.paramMap.get('id');
-    if (projectId) {
-      this.projectService.getProjectById(projectId).subscribe(
-        (project) => {
-          if (project) {
-            this.project = project;
-            this.loading = false;
-          } else {
-            this.error = true;
-            this.loading = false;
-          }
-        },
-        () => {
-          this.error = true;
-          this.loading = false;
-        }
-      );
-    } else {
+    if (!projectId) {
       this.error = true;
       this.loading = false;
+      return;
     }
+    this.projectService.getProjectById(projectId).subscribe({
+      next: (project) => {
+        this.project = project;
+        this.error = !project;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loading = false;
+      },
+    });
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -70,19 +71,17 @@ export class ProjectDetailsComponent implements OnInit {
     window.open(url, '_blank');
   }
 
+  selectScreenshot(index: number): void {
+    this.activeScreenshotIndex = index;
+  }
+
   goToPreviousScreenshot(): void {
-    if (this.project && this.activeScreenshotIndex > 0) {
-      this.activeScreenshotIndex--;
-    }
+    const len = this.screenshots.length;
+    if (len) this.activeScreenshotIndex = (this.activeScreenshotIndex - 1 + len) % len;
   }
 
   goToNextScreenshot(): void {
-    if (
-      this.project &&
-      this.project.screenshots &&
-      this.activeScreenshotIndex < this.project.screenshots.length - 1
-    ) {
-      this.activeScreenshotIndex++;
-    }
+    const len = this.screenshots.length;
+    if (len) this.activeScreenshotIndex = (this.activeScreenshotIndex + 1) % len;
   }
 }

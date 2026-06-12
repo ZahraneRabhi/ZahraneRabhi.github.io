@@ -31,7 +31,6 @@ import { NavComponent } from './core/components/nav/nav.component';
     CardComponent,
     GithubStatsComponent,
     ContactComponent,
-    MatrixRainComponent,
     ModalComponentComponent,
     AboutComponent,
     NotFoundComponent,
@@ -42,6 +41,7 @@ import { NavComponent } from './core/components/nav/nav.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatrixRainComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

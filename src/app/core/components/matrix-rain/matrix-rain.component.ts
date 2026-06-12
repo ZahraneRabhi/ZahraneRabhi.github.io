@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'app-matrix-rain',
   template: `
     <style>
