@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project, ProjectService } from '../../core/services/project.service';
+import { SiteTheme, ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-project-details',
@@ -16,8 +17,24 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private themeService: ThemeService
   ) {}
+
+  readonly theme$ = this.themeService.theme$;
+
+  setTheme(theme: SiteTheme): void {
+    this.themeService.set(theme);
+    window.scrollTo(0, 0);
+  }
+
+  get stackLabels(): string {
+    return this.project?.stack.map(s => s.label).join(', ') ?? '';
+  }
+
+  get categoryLabels(): string {
+    return this.project?.category.join(', ') ?? '';
+  }
 
   get screenshots(): string[] {
     return this.project?.screenshots ?? [];

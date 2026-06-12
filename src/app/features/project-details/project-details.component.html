@@ -1,3 +1,4 @@
+<ng-container *ngIf="(theme$ | async) === 'matrix'; else vintageView">
 <div class="relative min-h-screen bg-black overflow-hidden">
   <!-- Full-page matrix rain backdrop -->
   <div class="fixed inset-0 z-0">
@@ -29,13 +30,20 @@
     <div *ngIf="!loading && !error && project" class="space-y-6">
 
       <!-- Breadcrumb -->
-      <nav class="flex items-center gap-2 font-mono text-sm">
-        <a routerLink="/" class="text-green-500/50 hover:text-green-400 transition-colors duration-200">~</a>
-        <span class="text-green-500/30">/</span>
-        <button (click)="goBack()" class="text-green-500/50 hover:text-green-400 transition-colors duration-200">projects</button>
-        <span class="text-green-500/30">/</span>
-        <span class="text-green-400">{{ project.id }}</span>
-        <span class="w-2 h-4 bg-green-400 animate-pulse ml-1"></span>
+      <nav class="flex items-center justify-between gap-2 font-mono text-sm">
+        <div class="flex items-center gap-2">
+          <a routerLink="/" class="text-green-500/50 hover:text-green-400 transition-colors duration-200">~</a>
+          <span class="text-green-500/30">/</span>
+          <button (click)="goBack()" class="text-green-500/50 hover:text-green-400 transition-colors duration-200">projects</button>
+          <span class="text-green-500/30">/</span>
+          <span class="text-green-400">{{ project.id }}</span>
+          <span class="w-2 h-4 bg-green-400 animate-pulse ml-1"></span>
+        </div>
+        <button (click)="setTheme('vintage')"
+          title="Switch to text-only vintage mode"
+          class="px-3 py-1 border border-green-500/30 rounded text-green-400/60 hover:text-green-400 hover:border-green-400/60 font-mono text-xs transition-all duration-200">
+          [ txt mode ]
+        </button>
       </nav>
 
       <!-- Hero Terminal Window -->
@@ -251,3 +259,85 @@
     </div>
   </div>
 </div>
+</ng-container>
+
+<!-- ============ VINTAGE TEXT-ONLY VIEW ============ -->
+<ng-template #vintageView>
+<div class="vintage-page">
+  <div class="page">
+
+    <p class="meta center">You are viewing the text-only edition of this site.
+      <button class="linklike" (click)="setTheme('matrix')">[ Enter the Matrix ]</button>
+    </p>
+
+    <hr>
+
+    <!-- Loading -->
+    <p *ngIf="loading"><i>Loading project data, please wait...</i></p>
+
+    <!-- Error -->
+    <ng-container *ngIf="!loading && error">
+      <h1>ERROR 404</h1>
+      <p class="center">The requested project was not found on this server.</p>
+      <p class="center"><a routerLink="/">[ Return to home page ]</a></p>
+    </ng-container>
+
+    <!-- Content -->
+    <ng-container *ngIf="!loading && !error && project">
+
+      <p class="meta">~ / <a routerLink="/">projects</a> / {{ project.id }}</p>
+
+      <h1>{{ project.name }}</h1>
+      <p class="subtitle">{{ project.description }}</p>
+
+      <div class="ascii-divider">==========================================================</div>
+
+      <h2>1. ABOUT</h2>
+      <p>{{ project.longDescription }}</p>
+
+      <h2>2. FEATURES</h2>
+      <ol>
+        <li *ngFor="let feature of project.features">{{ feature }}</li>
+      </ol>
+
+      <h2>3. TECHNOLOGY</h2>
+      <p>Built with: {{ stackLabels }}.</p>
+
+      <h2>4. PROJECT INFORMATION</h2>
+      <table>
+        <tr><th>Field</th><th>Value</th></tr>
+        <tr><td>Release date</td><td>{{ project.releaseDate }}</td></tr>
+        <tr><td>Categories</td><td>{{ categoryLabels }}</td></tr>
+        <tr>
+          <td>Source code</td>
+          <td>
+            <a *ngIf="project.githubLink; else notAvailable" [href]="project.githubLink" target="_blank">{{ project.githubLink }}</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Live demo</td>
+          <td>
+            <a *ngIf="project.liveDemo; else notAvailable" [href]="project.liveDemo" target="_blank">{{ project.liveDemo }}</a>
+          </td>
+        </tr>
+      </table>
+      <ng-template #notAvailable>Not available</ng-template>
+
+      <ng-container *ngIf="hasScreenshots">
+        <h2>5. SCREENSHOTS</h2>
+        <p class="meta">{{ screenshots.length }} image(s). Loading may take a moment on slow connections.</p>
+        <img *ngFor="let shot of screenshots" [src]="shot" alt="Project screenshot" class="shot" loading="lazy">
+      </ng-container>
+
+      <hr>
+
+      <p class="footer">
+        <a routerLink="/">[ Back to home page ]</a><br>
+        Best viewed with Netscape Navigator 4.0 at 800x600 resolution.<br>
+        <span class="blink">_</span>
+      </p>
+
+    </ng-container>
+  </div>
+</div>
+</ng-template>
