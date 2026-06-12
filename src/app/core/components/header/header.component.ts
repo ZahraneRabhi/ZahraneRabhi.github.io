@@ -167,9 +167,9 @@ export class HeaderComponent implements AfterViewChecked {
     const skillsText = this.sanitizer.bypassSecurityTrustHtml(`
       <div class="mb-2">Technical Skills:</div>
       <div class="grid grid-cols-2 gap-1">
-        <div class="text-green-400">Frontend:</div><div>Angular, React, TailwindCSS, TypeScript, JavaScript</div>
+        <div class="text-green-400">Frontend:</div><div>Angular, TailwindCSS, TypeScript, JavaScript</div>
         <div class="text-green-400">Backend:</div><div>Python, C# </div>
-        <div class="text-green-400">Data Science:</div><div>Python, TensorFlow, Pandas, Scikit-learn</div>
+        <div class="text-green-400">AI & Data Science:</div><div>Python, PyTorch, SpaCy, Pandas, Scikit-learn</div>
         <div class="text-green-400">Databases:</div><div>SQL Server</div>
         <div class="text-green-400">DevOps:</div><div>Docker, CI/CD, Azure, Git</div>
       </div>
@@ -223,40 +223,19 @@ export class HeaderComponent implements AfterViewChecked {
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝
 </pre>`,
 `<pre class="text-green-400">
-
-
-░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░▒▓██████████████▓▒░  
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓███████▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-</pre>`,
-
-`<pre class="text-green-400">
- _                          _     _ 
-| |                        | |   (_)
-| |_ _   _ _ __   ___   ___| |__  _ 
-| __| | | | '_ \ / _ \ / __| '_ \| |
-| |_| |_| | |_) |  __/ \__ \ | | | |
- \__|\__, | .__/ \___| |___/_| |_|_|
-      __/ | |                       
-     |___/|_|                       
-
+▄▄▄▄▄ ▗▞▀▜▌▐▌    ▄▄▄ ▗▞▀▜▌▄▄▄▄  ▗▞▀▚▖
+ ▄▄▄▀ ▝▚▄▟▌▐▌   █    ▝▚▄▟▌█   █ ▐▛▀▀▘
+█▄▄▄▄      ▐▛▀▚▖█         █   █ ▝▚▄▄▖
+           ▐▌ ▐▌                                                                                                                        
 </pre>`,
 `<pre class="text-green-400">
- ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
- ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
- ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
- ⠀⠀⢤⣀⣀⣀⠀⠀⢸⣷⡄⠀⣁⣀⣤⣴⣿⣿⣿⣆
- ⠀⠀⠀⠀⠹⠏⠀⠀⠀⣿⣧⠀⠹⣿⣿⣿⣿⣿⡿⣿
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⠇⢀⣼⣿⣿⠛⢯⡿⡟
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠦⠴⢿⢿⣿⡿⠷⠀⣿⠀
- ⠀⠀⠀⠀⠀⠀⠀⠙⣷⣶⣶⣤⣤⣤⣤⣤⣶⣦⠃⠀
- ⠀⠀⠀⠀⠀⠀⠀⢐⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
- ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁
+░▒▓████████▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░
+       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+     ░▒▓██▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+   ░▒▓██▓▒░  ░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░
+ ░▒▓██▓▒░    ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░
 </pre>`,
     ];
     const randomAscii = asciiOptions[Math.floor(Math.random() * asciiOptions.length)];

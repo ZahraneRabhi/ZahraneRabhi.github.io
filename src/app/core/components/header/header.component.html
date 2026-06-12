@@ -46,12 +46,12 @@
   <div class="text-green-500/70 font-mono text-sm mb-2">// User profile initialized</div>
   <p class="text-green-300 font-mono text-lg leading-relaxed">
     Greetings, I’m <span class="text-green-400 font-bold">Zahrane Rabhi</span> — a
-    <span class="text-green-400 font-bold">Full Stack Developer</span> and
-    <span class="text-green-400 font-bold">Machine Learning • Generative AI • NLP Engineer</span>
+    <span class="text-green-400 font-bold">Full Stack Developer</span> •
+    <span class="text-green-400 font-bold">Generative AI • NLP Engineer</span>
     driven by curiosity and creativity. I craft seamless digital experiences and build
     intelligent data-driven solutions that bridge innovation with real-world impact.
     <br class="hidden sm:block" />
-    <span class="text-green-500/80">// Let’s create something extraordinary.</span>
+    <span class="text-green-500/80">// Let’s create something great together.</span>
   </p>
 </div>
 
@@ -60,7 +60,7 @@
           <div class="text-center pt-6">
             <button (click)="redirectToLinkedin()"
               class="group inline-flex items-center gap-3 px-8 py-4 bg-black border border-green-500/30 text-green-400 font-mono text-lg rounded hover:bg-green-500/10 hover:border-green-400/60 transition-all duration-300">
-              <span>&gt; ./explore_matrix</span>
+              <span>&gt; ./connect</span>
               <div class="w-3 h-5 bg-green-400 animate-pulse"></div>
             </button>
           </div>
@@ -74,7 +74,7 @@
           <div class="bg-black/70 rounded border border-green-500/30 p-3 mb-2 h-40 overflow-auto text-left"
             #terminalOutput (scroll)="onTerminalScroll()"
             style="scroll-behavior: smooth; overscroll-behavior: none; will-change: transform;">
-            <div class="text-green-400/90 font-mono text-xs mb-2">Matrix Terminal v2.0 - Type /help for available
+            <div class="text-green-400/90 font-mono text-xs mb-2">Terminal - Type /help for available
               commands</div>
             <div *ngFor="let line of commandHistory" class="font-mono text-xs mb-1 transition-opacity duration-200">
               <span *ngIf="line.isCommand" class="text-green-400">&gt; {{ line.text }}</span>
