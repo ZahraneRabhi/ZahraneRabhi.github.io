@@ -221,7 +221,7 @@ class CardComponent {
     },
     decls: 35,
     vars: 6,
-    consts: [[1, "matrix-card", "h-full", "flex", "flex-col"], [1, "relative", "h-48", "overflow-hidden"], [1, "absolute", "inset-0", "z-10", "scan-line"], [1, "absolute", "inset-0", "bg-green-900/20", "z-0"], [1, "absolute", "inset-0", "z-0", "matrix-overlay", "opacity-20"], [1, "w-full", "h-full", "object-cover", "brightness-75", "contrast-125", 3, "src", "alt"], [1, "absolute", "bottom-0", "left-0", "right-0", "bg-black/70", "backdrop-blur-sm", "p-2", "border-t", "border-green-500/30"], [1, "flex", "items-center"], [1, "text-green-400", "font-mono", "text-xs", "mr-2"], [1, "text-green-400", "font-mono", "text-sm", "truncate"], [1, "p-4", "flex-grow", "flex", "flex-col"], [1, "flex", "items-start", "mb-3"], [1, "text-green-400", "font-mono", "text-sm", "mr-2"], [1, "text-xl", "font-bold", "text-green-400", "font-mono", "leading-tight"], [1, "mb-4", "flex-grow"], [1, "text-green-300/80", "font-mono", "text-sm", "leading-relaxed", "h-24", "overflow-hidden"], [1, "mb-4", "border-t", "border-green-500/20", "pt-3"], [1, "flex", "items-center", "mb-2"], [1, "text-green-500/70", "font-mono", "text-xs", "mr-2"], [1, "flex", "flex-wrap", "gap-2"], ["class", "flex items-center bg-black/50 px-2 py-1 rounded border border-green-500/20", 4, "ngFor", "ngForOf"], [1, "mt-auto", "space-y-2"], [1, "w-full", "flex", "items-center", "justify-center", "gap-2", "py-2", "bg-black", "border", "border-green-500/30", "text-green-400", "font-mono", "text-sm", "rounded", "hover:bg-green-500/10", "transition-all", "duration-300", 3, "click"], [1, "w-1", "h-4", "bg-green-400", "animate-pulse"], [1, "w-full", "flex", "items-center", "justify-center", "gap-2", "py-1", "bg-transparent", "border", "border-green-500/20", "text-green-400/70", "font-mono", "text-xs", "rounded", "hover:border-green-400/40", "hover:text-green-400", "transition-all", "duration-300", 3, "click"], [1, "flex", "items-center", "bg-black/50", "px-2", "py-1", "rounded", "border", "border-green-500/20"], [1, "w-4", "h-4", "mr-1", 3, "src", "alt"], [1, "text-green-300/80", "font-mono", "text-xs"]],
+    consts: [[1, "matrix-card", "h-full", "flex", "flex-col"], [1, "relative", "h-48", "overflow-hidden"], [1, "absolute", "inset-0", "z-10", "scan-line"], [1, "absolute", "inset-0", "bg-green-900/20", "z-0"], [1, "absolute", "inset-0", "z-0", "matrix-overlay", "opacity-20"], [1, "w-full", "h-full", "object-cover", "brightness-75", "contrast-125", 3, "src", "alt"], [1, "absolute", "bottom-0", "left-0", "right-0", "bg-black/70", "backdrop-blur-sm", "p-2", "border-t", "border-green-500/30"], [1, "flex", "items-center"], [1, "text-green-400", "font-mono", "text-xs", "mr-2"], [1, "text-green-400", "font-mono", "text-sm", "truncate"], [1, "p-4", "flex-grow", "flex", "flex-col"], [1, "flex", "items-start", "mb-3"], [1, "text-green-400", "font-mono", "text-sm", "mr-2"], [1, "text-xl", "font-bold", "text-green-400", "font-mono", "leading-tight"], [1, "mb-4", "flex-grow"], [1, "text-green-300/80", "font-mono", "text-sm", "leading-relaxed", "h-24", "overflow-hidden"], [1, "mb-4", "border-t", "border-green-500/20", "pt-3"], [1, "flex", "items-center", "mb-2"], [1, "text-green-500/70", "font-mono", "text-xs", "mr-2"], [1, "flex", "flex-wrap", "gap-2"], ["class", "flex items-center bg-black/50 px-2 py-1 rounded border border-green-500/20", 4, "ngFor", "ngForOf"], [1, "mt-auto", "space-y-2"], [1, "w-full", "flex", "items-center", "justify-center", "gap-2", "py-2", "bg-black/40", "border", "border-green-500/30", "text-green-400", "font-mono", "text-sm", "rounded", "hover:bg-green-500/10", "transition-all", "duration-300", 3, "click"], [1, "w-1", "h-4", "bg-green-400", "animate-pulse"], [1, "w-full", "flex", "items-center", "justify-center", "gap-2", "py-1", "bg-transparent", "border", "border-green-500/20", "text-green-400/70", "font-mono", "text-xs", "rounded", "hover:border-green-400/40", "hover:text-green-400", "transition-all", "duration-300", 3, "click"], [1, "flex", "items-center", "bg-black/50", "px-2", "py-1", "rounded", "border", "border-green-500/20"], [1, "w-4", "h-4", "mr-1", 3, "src", "alt"], [1, "text-green-300/80", "font-mono", "text-xs"]],
     template: function CardComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
@@ -306,7 +306,7 @@ class FooterComponent {
     selectors: [["app-footer"]],
     decls: 55,
     vars: 0,
-    consts: [[1, "relative", "bg-black", "border-t", "border-green-500/30", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-10"], [1, "absolute", "inset-0", 2, "background-image", "repeating-linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.05) 1px, transparent 2px)"], [1, "relative", "z-10", "p-10"], [1, "bg-black/60", "border", "border-green-500/30", "rounded-lg", "backdrop-blur-sm", "overflow-hidden", "max-w-4xl", "mx-auto"], [1, "bg-black/80", "border-b", "border-green-500/30", "px-4", "py-2", "flex", "items-center", "gap-2"], [1, "w-2", "h-2", "rounded-full", "bg-red-500/70"], [1, "w-2", "h-2", "rounded-full", "bg-yellow-500/70"], [1, "w-2", "h-2", "rounded-full", "bg-green-500/70"], [1, "ml-3", "text-green-400", "font-mono", "text-xs"], [1, "p-6"], [1, "text-center", "space-y-4"], [1, "border-l-2", "border-green-500/50", "pl-4", "text-left"], [1, "text-green-500/70", "font-mono", "text-xs", "mb-1"], [1, "text-xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "text-green-300/80", "font-mono", "text-sm"], [1, "mt-6"], [1, "text-green-500/70", "font-mono", "text-xs", "mb-3"], [1, "flex", "justify-center", "space-x-6"], ["href", "https://linkedin.com/in/zahranerabhi", 1, "group", "flex", "items-center", "gap-2", "px-3", "py-2", "bg-black/50", "border", "border-green-500/30", "rounded", "text-green-400", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", "font-mono", "text-sm"], ["fill", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4"], ["d", "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"], ["href", "https://github.com/ZahraneRabhi", 1, "group", "flex", "items-center", "gap-2", "px-3", "py-2", "bg-black/50", "border", "border-green-500/30", "rounded", "text-green-400", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", "font-mono", "text-sm"], ["d", "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"], [1, "mt-6", "border-t", "border-green-500/20", "pt-4"], [1, "text-green-500/70", "font-mono", "text-xs", "mb-2"], [1, "flex", "items-center", "justify-center", "gap-2", "text-green-300", "font-mono", "text-sm"], ["href", "mailto:ZahraneRabhi@outlook.com", 1, "text-green-400", "hover:text-green-300", "transition-colors", "duration-300"], [1, "mt-6", "pt-4", "border-t", "border-green-500/20"], [1, "flex", "items-center", "justify-center", "gap-2", "text-green-400/70", "font-mono", "text-xs"], [1, "w-2", "h-3", "bg-green-400", "animate-pulse"], [1, "ml-2"], [1, "absolute", "top-1", "left-1", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/50"], [1, "absolute", "top-1", "right-1", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/50"], [1, "absolute", "bottom-1", "left-1", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/50"], [1, "absolute", "bottom-1", "right-1", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/50"]],
+    consts: [[1, "relative", "border-t", "border-green-500/30", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-10"], [1, "absolute", "inset-0", 2, "background-image", "repeating-linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.05) 1px, transparent 2px)"], [1, "relative", "z-10", "p-10"], [1, "liquid-glass", "rounded-2xl", "overflow-hidden", "max-w-4xl", "mx-auto"], [1, "liquid-glass-bar", "px-4", "py-2", "flex", "items-center", "gap-2"], [1, "w-2", "h-2", "rounded-full", "bg-red-500/70"], [1, "w-2", "h-2", "rounded-full", "bg-yellow-500/70"], [1, "w-2", "h-2", "rounded-full", "bg-green-500/70"], [1, "ml-3", "text-green-400", "font-mono", "text-xs"], [1, "p-6"], [1, "text-center", "space-y-4"], [1, "border-l-2", "border-green-500/50", "pl-4", "text-left"], [1, "text-green-500/70", "font-mono", "text-xs", "mb-1"], [1, "text-xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "text-green-300/80", "font-mono", "text-sm"], [1, "mt-6"], [1, "text-green-500/70", "font-mono", "text-xs", "mb-3"], [1, "flex", "justify-center", "space-x-6"], ["href", "https://linkedin.com/in/zahranerabhi", 1, "group", "flex", "items-center", "gap-2", "px-3", "py-2", "bg-black/50", "border", "border-green-500/30", "rounded", "text-green-400", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", "font-mono", "text-sm"], ["fill", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4"], ["d", "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"], ["href", "https://github.com/ZahraneRabhi", 1, "group", "flex", "items-center", "gap-2", "px-3", "py-2", "bg-black/50", "border", "border-green-500/30", "rounded", "text-green-400", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", "font-mono", "text-sm"], ["d", "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"], [1, "mt-6", "border-t", "border-green-500/20", "pt-4"], [1, "text-green-500/70", "font-mono", "text-xs", "mb-2"], [1, "flex", "items-center", "justify-center", "gap-2", "text-green-300", "font-mono", "text-sm"], ["href", "mailto:ZahraneRabhi@outlook.com", 1, "text-green-400", "hover:text-green-300", "transition-colors", "duration-300"], [1, "mt-6", "pt-4", "border-t", "border-green-500/20"], [1, "flex", "items-center", "justify-center", "gap-2", "text-green-400/70", "font-mono", "text-xs"], [1, "w-2", "h-3", "bg-green-400", "animate-pulse"], [1, "ml-2"], [1, "absolute", "top-1", "left-1", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/50"], [1, "absolute", "top-1", "right-1", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/50"], [1, "absolute", "bottom-1", "left-1", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/50"], [1, "absolute", "bottom-1", "right-1", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/50"]],
     template: function FooterComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "footer", 0)(1, "div", 1);
@@ -386,50 +386,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HeaderComponent: () => (/* binding */ HeaderComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 1699);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ 6480);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 6575);
-/* harmony import */ var _matrix_rain_matrix_rain_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../matrix-rain/matrix-rain.component */ 6750);
-
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 1699);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ 6480);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 6575);
 
 
 
 const _c0 = ["terminalOutput"];
 const _c1 = ["commandInput"];
-function HeaderComponent_div_58_span_1_Template(rf, ctx) {
+function HeaderComponent_div_56_span_1_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "span", 43);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 41);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
-    const line_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]().$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("> ", line_r3.text, "");
+    const line_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("> ", line_r3.text, "");
   }
 }
-function HeaderComponent_div_58_div_2_Template(rf, ctx) {
+function HeaderComponent_div_56_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "div", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "div", 42);
   }
   if (rf & 2) {
-    const line_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]().$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("innerHTML", line_r3.text, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeHtml"]);
+    const line_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("innerHTML", line_r3.text, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeHtml"]);
   }
 }
-function HeaderComponent_div_58_Template(rf, ctx) {
+function HeaderComponent_div_56_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 40);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, HeaderComponent_div_58_span_1_Template, 2, 1, "span", 41);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](2, HeaderComponent_div_58_div_2_Template, 1, 1, "div", 42);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, HeaderComponent_div_56_span_1_Template, 2, 1, "span", 39);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, HeaderComponent_div_56_div_2_Template, 1, 1, "div", 40);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
     const line_r3 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", line_r3.isCommand);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !line_r3.isCommand);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", line_r3.isCommand);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !line_r3.isCommand);
   }
 }
 class HeaderComponent {
@@ -698,116 +696,114 @@ class HeaderComponent {
     });
   }
   static #_ = this.ɵfac = function HeaderComponent_Factory(t) {
-    return new (t || HeaderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__.DomSanitizer), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__.NgZone), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__.ChangeDetectorRef));
+    return new (t || HeaderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__.DomSanitizer), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__.NgZone), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__.ChangeDetectorRef));
   };
-  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
     type: HeaderComponent,
     selectors: [["app-header"]],
     viewQuery: function HeaderComponent_Query(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵviewQuery"](_c0, 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵviewQuery"](_c1, 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c1, 5);
       }
       if (rf & 2) {
         let _t;
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵloadQuery"]()) && (ctx.terminalOutput = _t.first);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵloadQuery"]()) && (ctx.commandInput = _t.first);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.terminalOutput = _t.first);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.commandInput = _t.first);
       }
     },
-    decls: 68,
+    decls: 66,
     vars: 1,
-    consts: [[1, "hero", "min-h-screen", "relative", "overflow-hidden"], [1, "absolute", "inset-0"], [1, "absolute", "inset-0", "bg-black/20"], [1, "relative", "z-10", "text-center", "px-8", "py-12", "max-w-5xl"], [1, "liquid-glass", "rounded-2xl", "shadow-2xl", "overflow-hidden"], [1, "liquid-glass-bar", "px-4", "py-2", "flex", "items-center", "gap-2"], [1, "w-3", "h-3", "rounded-full", "bg-red-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-yellow-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-green-500/70"], [1, "ml-4", "text-green-400", "font-mono", "text-sm"], [1, "p-8", "text-left"], [1, "space-y-2", "mb-8"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-xs"], [1, "space-y-4"], [1, "text-4xl", "md:text-5xl", "font-bold", "text-center"], [1, "text-white", "font-mono"], [1, "text-green-400", "font-mono", "tracking-wider"], [1, "border-l-2", "border-green-500/50", "pl-4", "my-6"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-2"], [1, "text-green-300", "font-mono", "text-lg", "leading-relaxed"], [1, "text-green-400", "font-bold"], [1, "hidden", "sm:block"], [1, "text-green-500/80"], [1, "text-center", "pt-6"], [1, "group", "inline-flex", "items-center", "gap-3", "px-8", "py-4", "bg-black", "border", "border-green-500/30", "text-green-400", "font-mono", "text-lg", "rounded", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", 3, "click"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "mt-6", "pt-4", "border-t", "border-green-500/20"], [1, "liquid-glass-inner", "rounded-lg", "p-3", "mb-2", "h-40", "overflow-auto", "text-left", 2, "scroll-behavior", "smooth", "overscroll-behavior", "none", "will-change", "transform", 3, "scroll"], ["terminalOutput", ""], [1, "text-green-400/90", "font-mono", "text-xs", "mb-2"], ["class", "font-mono text-xs mb-1 transition-opacity duration-200", 4, "ngFor", "ngForOf"], [1, "flex", "items-center", "gap-2", "liquid-glass-inner", "rounded-lg", "px-2"], [1, "text-green-400", "font-mono", "text-sm"], ["type", "text", "placeholder", "Type a command... (\u2191\u2193 for history)", 1, "bg-transparent", "border-none", "text-green-400", "font-mono", "text-sm", "focus:outline-none", "py-2", "w-full", 3, "keydown"], ["commandInput", ""], [1, "absolute", "top-2", "left-2", "w-6", "h-6", "border-l-2", "border-t-2", "border-green-400/50"], [1, "absolute", "top-2", "right-2", "w-6", "h-6", "border-r-2", "border-t-2", "border-green-400/50"], [1, "absolute", "bottom-2", "left-2", "w-6", "h-6", "border-l-2", "border-b-2", "border-green-400/50"], [1, "absolute", "bottom-2", "right-2", "w-6", "h-6", "border-r-2", "border-b-2", "border-green-400/50"], [1, "font-mono", "text-xs", "mb-1", "transition-opacity", "duration-200"], ["class", "text-green-400", 4, "ngIf"], ["class", "text-green-300/80", 3, "innerHTML", 4, "ngIf"], [1, "text-green-400"], [1, "text-green-300/80", 3, "innerHTML"]],
+    consts: [[1, "hero", "min-h-screen", "relative"], [1, "relative", "z-10", "text-center", "px-4", "pt-20", "pb-6", "max-w-4xl", "w-full"], [1, "liquid-glass", "rounded-2xl", "shadow-2xl", "overflow-hidden"], [1, "liquid-glass-bar", "px-4", "py-2", "flex", "items-center", "gap-2"], [1, "w-3", "h-3", "rounded-full", "bg-red-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-yellow-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-green-500/70"], [1, "ml-4", "text-green-400", "font-mono", "text-sm"], [1, "p-5", "md:p-6", "text-left"], [1, "space-y-1", "mb-4"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-xs"], [1, "space-y-3"], [1, "text-3xl", "md:text-4xl", "font-bold", "text-center"], [1, "text-white", "font-mono"], [1, "text-green-400", "font-mono", "tracking-wider"], [1, "border-l-2", "border-green-500/50", "pl-4", "my-4"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-2"], [1, "text-green-300", "font-mono", "text-base", "leading-relaxed"], [1, "text-green-400", "font-bold"], [1, "hidden", "sm:block"], [1, "text-green-500/80"], [1, "text-center", "pt-2"], [1, "group", "inline-flex", "items-center", "gap-3", "px-6", "py-2.5", "bg-black/40", "border", "border-green-500/30", "text-green-400", "font-mono", "text-base", "rounded", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", 3, "click"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "mt-4", "pt-3", "border-t", "border-green-500/20"], [1, "liquid-glass-inner", "rounded-lg", "p-3", "mb-2", "h-28", "md:h-32", "overflow-auto", "text-left", 2, "scroll-behavior", "smooth", "overscroll-behavior", "none", "will-change", "transform", 3, "scroll"], ["terminalOutput", ""], [1, "text-green-400/90", "font-mono", "text-xs", "mb-2"], ["class", "font-mono text-xs mb-1 transition-opacity duration-200", 4, "ngFor", "ngForOf"], [1, "flex", "items-center", "gap-2", "liquid-glass-inner", "rounded-lg", "px-2"], [1, "text-green-400", "font-mono", "text-sm"], ["type", "text", "placeholder", "Type a command... (\u2191\u2193 for history)", 1, "bg-transparent", "border-none", "text-green-400", "font-mono", "text-sm", "focus:outline-none", "py-2", "w-full", 3, "keydown"], ["commandInput", ""], [1, "absolute", "top-2", "left-2", "w-6", "h-6", "border-l-2", "border-t-2", "border-green-400/50"], [1, "absolute", "top-2", "right-2", "w-6", "h-6", "border-r-2", "border-t-2", "border-green-400/50"], [1, "absolute", "bottom-2", "left-2", "w-6", "h-6", "border-l-2", "border-b-2", "border-green-400/50"], [1, "absolute", "bottom-2", "right-2", "w-6", "h-6", "border-r-2", "border-b-2", "border-green-400/50"], [1, "font-mono", "text-xs", "mb-1", "transition-opacity", "duration-200"], ["class", "text-green-400", 4, "ngIf"], ["class", "text-green-300/80", 3, "innerHTML", 4, "ngIf"], [1, "text-green-400"], [1, "text-green-300/80", 3, "innerHTML"]],
     template: function HeaderComponent_Template(rf, ctx) {
       if (rf & 1) {
-        const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "app-matrix-rain", 1)(2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 3)(4, "div", 4)(5, "div", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](6, "div", 6)(7, "div", 7)(8, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "span", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "root@matrix:~$");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div", 10)(12, "div", 11)(13, "div", 12)(14, "span");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](15, "> system.boot()");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, " Loading portfolio.exe... ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](19, " Initializing user interface... [OK] ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "div", 14)(21, "h1", 15)(22, "span", 16);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](23, "Welcome to");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](24, "br");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "span", 17);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26, "Zahrane Rabhi's");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "span", 16);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, " Portfolio");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "div", 18)(30, "div", 19);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, "// User profile initialized");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "p", 20);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](33, " Greetings, I\u2019m ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "span", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](35, "Zahrane Rabhi");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, " \u2014 a ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](37, "span", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](38, "Full Stack Developer");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](39, " \u2022 ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "span", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, "Generative AI \u2022 NLP Engineer");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](42, " driven by curiosity and creativity. I craft seamless digital experiences and build intelligent data-driven solutions that bridge innovation with real-world impact. ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](43, "br", 22);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](44, "span", 23);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](45, "// Let\u2019s create something great together.");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](46, "div", 24)(47, "button", 25);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function HeaderComponent_Template_button_click_47_listener() {
+        const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "div", 4)(5, "div", 5)(6, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "span", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "root@matrix:~$");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 8)(10, "div", 9)(11, "div", 10)(12, "span");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, "> system.boot()");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, " Loading portfolio.exe... ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, " Initializing user interface... [OK] ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 12)(19, "h1", 13)(20, "span", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Welcome to");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "span", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Zahrane Rabhi's");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "span", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, " Portfolio");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "div", 16)(28, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "// User profile initialized");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "p", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, " Greetings, I\u2019m ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "span", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](33, "Zahrane Rabhi");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, " \u2014 a ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "span", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, "Full Stack Developer");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](37, " \u2022 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "span", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Generative AI \u2022 NLP Engineer");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](40, " driven by curiosity and creativity. I craft seamless digital experiences and build intelligent data-driven solutions that bridge innovation with real-world impact. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](41, "br", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "span", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](43, "// Let\u2019s create something great together.");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "div", 22)(45, "button", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HeaderComponent_Template_button_click_45_listener() {
           return ctx.redirectToLinkedin();
         });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](48, "span");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](49, "> ./connect");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](50, "div", 26);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](51, "div", 27)(52, "div", 19);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](53, "// Interactive terminal");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](54, "div", 28, 29);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("scroll", function HeaderComponent_Template_div_scroll_54_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](46, "span");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](47, "> ./connect");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](48, "div", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "div", 25)(50, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](51, "// Interactive terminal");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](52, "div", 26, 27);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("scroll", function HeaderComponent_Template_div_scroll_52_listener() {
           return ctx.onTerminalScroll();
         });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](56, "div", 30);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](57, "Terminal - Type /help for available commands");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](58, HeaderComponent_div_58_Template, 3, 2, "div", 31);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](59, "div", 32)(60, "span", 33);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](61, ">");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](62, "input", 34, 35);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("keydown", function HeaderComponent_Template_input_keydown_62_listener($event) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r8);
-          const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](63);
-          return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx.onInputKeydown($event, _r2));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "div", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, "Terminal - Type /help for available commands");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](56, HeaderComponent_div_56_Template, 3, 2, "div", 29);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](57, "div", 30)(58, "span", 31);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](59, ">");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](60, "input", 32, 33);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keydown", function HeaderComponent_Template_input_keydown_60_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
+          const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](61);
+          return _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresetView"](ctx.onInputKeydown($event, _r2));
         });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](64, "div", 36)(65, "div", 37)(66, "div", 38)(67, "div", 39);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](62, "div", 34)(63, "div", 35)(64, "div", 36)(65, "div", 37);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
       }
       if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](58);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.commandHistory);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](56);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.commandHistory);
       }
     },
-    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _matrix_rain_matrix_rain_component__WEBPACK_IMPORTED_MODULE_0__.MatrixRainComponent],
-    styles: [".glow-effect[_ngcontent-%COMP%] {\n    text-shadow: 0 0 8px rgba(72, 255, 72, 0.7);\n  }\n\n\n\n\n.liquid-glass[_ngcontent-%COMP%] {\n  background: linear-gradient(\n    160deg,\n    rgba(0, 255, 65, 0.07) 0%,\n    rgba(0, 0, 0, 0.30) 35%,\n    rgba(0, 0, 0, 0.42) 100%\n  );\n  backdrop-filter: blur(28px) saturate(170%);\n  -webkit-backdrop-filter: blur(28px) saturate(170%);\n  border: 1px solid rgba(0, 255, 65, 0.22);\n  box-shadow:\n    inset 0 1px 0 rgba(255, 255, 255, 0.14),\n    inset 0 -1px 0 rgba(0, 0, 0, 0.35),\n    inset 0 0 40px rgba(0, 255, 65, 0.04),\n    0 12px 40px rgba(0, 0, 0, 0.55),\n    0 0 0 0.5px rgba(255, 255, 255, 0.06);\n}\n\n.liquid-glass-bar[_ngcontent-%COMP%] {\n  background: rgba(0, 0, 0, 0.25);\n  backdrop-filter: blur(16px) saturate(150%);\n  -webkit-backdrop-filter: blur(16px) saturate(150%);\n  border-bottom: 1px solid rgba(0, 255, 65, 0.18);\n}\n\n.liquid-glass-inner[_ngcontent-%COMP%] {\n  background: rgba(0, 0, 0, 0.35);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border: 1px solid rgba(0, 255, 65, 0.18);\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMkNBQTJDO0VBQzdDOzs7QUFHRiw0REFBNEQ7QUFDNUQ7RUFDRTs7Ozs7R0FLQztFQUNELDBDQUEwQztFQUMxQyxrREFBa0Q7RUFDbEQsd0NBQXdDO0VBQ3hDOzs7Ozt5Q0FLdUM7QUFDekM7O0FBRUE7RUFDRSwrQkFBK0I7RUFDL0IsMENBQTBDO0VBQzFDLGtEQUFrRDtFQUNsRCwrQ0FBK0M7QUFDakQ7O0FBRUE7RUFDRSwrQkFBK0I7RUFDL0IsMkJBQTJCO0VBQzNCLG1DQUFtQztFQUNuQyx3Q0FBd0M7RUFDeEMsbURBQW1EO0FBQ3JEIiwiZmlsZSI6ImhlYWRlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdsb3ctZWZmZWN0IHtcbiAgICB0ZXh0LXNoYWRvdzogMCAwIDhweCByZ2JhKDcyLCAyNTUsIDcyLCAwLjcpO1xuICB9XG5cblxuLyogaU9TIGxpcXVpZC1nbGFzcyB0cmVhdG1lbnQgZm9yIHRoZSBoZXJvIHRlcm1pbmFsIHdpbmRvdyAqL1xuLmxpcXVpZC1nbGFzcyB7XG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudChcbiAgICAxNjBkZWcsXG4gICAgcmdiYSgwLCAyNTUsIDY1LCAwLjA3KSAwJSxcbiAgICByZ2JhKDAsIDAsIDAsIDAuMzApIDM1JSxcbiAgICByZ2JhKDAsIDAsIDAsIDAuNDIpIDEwMCVcbiAgKTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDI4cHgpIHNhdHVyYXRlKDE3MCUpO1xuICAtd2Via2l0LWJhY2tkcm9wLWZpbHRlcjogYmx1cigyOHB4KSBzYXR1cmF0ZSgxNzAlKTtcbiAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgwLCAyNTUsIDY1LCAwLjIyKTtcbiAgYm94LXNoYWRvdzpcbiAgICBpbnNldCAwIDFweCAwIHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4xNCksXG4gICAgaW5zZXQgMCAtMXB4IDAgcmdiYSgwLCAwLCAwLCAwLjM1KSxcbiAgICBpbnNldCAwIDAgNDBweCByZ2JhKDAsIDI1NSwgNjUsIDAuMDQpLFxuICAgIDAgMTJweCA0MHB4IHJnYmEoMCwgMCwgMCwgMC41NSksXG4gICAgMCAwIDAgMC41cHggcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA2KTtcbn1cblxuLmxpcXVpZC1nbGFzcy1iYXIge1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuMjUpO1xuICBiYWNrZHJvcC1maWx0ZXI6IGJsdXIoMTZweCkgc2F0dXJhdGUoMTUwJSk7XG4gIC13ZWJraXQtYmFja2Ryb3AtZmlsdGVyOiBibHVyKDE2cHgpIHNhdHVyYXRlKDE1MCUpO1xuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgcmdiYSgwLCAyNTUsIDY1LCAwLjE4KTtcbn1cblxuLmxpcXVpZC1nbGFzcy1pbm5lciB7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC4zNSk7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cigxMHB4KTtcbiAgLXdlYmtpdC1iYWNrZHJvcC1maWx0ZXI6IGJsdXIoMTBweCk7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHJnYmEoMCwgMjU1LCA2NSwgMC4xOCk7XG4gIGJveC1zaGFkb3c6IGluc2V0IDAgMXB4IDAgcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA4KTtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29yZS9jb21wb25lbnRzL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDJDQUEyQztFQUM3Qzs7O0FBR0YsNERBQTREO0FBQzVEO0VBQ0U7Ozs7O0dBS0M7RUFDRCwwQ0FBMEM7RUFDMUMsa0RBQWtEO0VBQ2xELHdDQUF3QztFQUN4Qzs7Ozs7eUNBS3VDO0FBQ3pDOztBQUVBO0VBQ0UsK0JBQStCO0VBQy9CLDBDQUEwQztFQUMxQyxrREFBa0Q7RUFDbEQsK0NBQStDO0FBQ2pEOztBQUVBO0VBQ0UsK0JBQStCO0VBQy9CLDJCQUEyQjtFQUMzQixtQ0FBbUM7RUFDbkMsd0NBQXdDO0VBQ3hDLG1EQUFtRDtBQUNyRDs7QUFFQSxvaEVBQW9oRSIsInNvdXJjZXNDb250ZW50IjpbIi5nbG93LWVmZmVjdCB7XG4gICAgdGV4dC1zaGFkb3c6IDAgMCA4cHggcmdiYSg3MiwgMjU1LCA3MiwgMC43KTtcbiAgfVxuXG5cbi8qIGlPUyBsaXF1aWQtZ2xhc3MgdHJlYXRtZW50IGZvciB0aGUgaGVybyB0ZXJtaW5hbCB3aW5kb3cgKi9cbi5saXF1aWQtZ2xhc3Mge1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoXG4gICAgMTYwZGVnLFxuICAgIHJnYmEoMCwgMjU1LCA2NSwgMC4wNykgMCUsXG4gICAgcmdiYSgwLCAwLCAwLCAwLjMwKSAzNSUsXG4gICAgcmdiYSgwLCAwLCAwLCAwLjQyKSAxMDAlXG4gICk7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cigyOHB4KSBzYXR1cmF0ZSgxNzAlKTtcbiAgLXdlYmtpdC1iYWNrZHJvcC1maWx0ZXI6IGJsdXIoMjhweCkgc2F0dXJhdGUoMTcwJSk7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHJnYmEoMCwgMjU1LCA2NSwgMC4yMik7XG4gIGJveC1zaGFkb3c6XG4gICAgaW5zZXQgMCAxcHggMCByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMTQpLFxuICAgIGluc2V0IDAgLTFweCAwIHJnYmEoMCwgMCwgMCwgMC4zNSksXG4gICAgaW5zZXQgMCAwIDQwcHggcmdiYSgwLCAyNTUsIDY1LCAwLjA0KSxcbiAgICAwIDEycHggNDBweCByZ2JhKDAsIDAsIDAsIDAuNTUpLFxuICAgIDAgMCAwIDAuNXB4IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNik7XG59XG5cbi5saXF1aWQtZ2xhc3MtYmFyIHtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjI1KTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDE2cHgpIHNhdHVyYXRlKDE1MCUpO1xuICAtd2Via2l0LWJhY2tkcm9wLWZpbHRlcjogYmx1cigxNnB4KSBzYXR1cmF0ZSgxNTAlKTtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMjU1LCA2NSwgMC4xOCk7XG59XG5cbi5saXF1aWQtZ2xhc3MtaW5uZXIge1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuMzUpO1xuICBiYWNrZHJvcC1maWx0ZXI6IGJsdXIoMTBweCk7XG4gIC13ZWJraXQtYmFja2Ryb3AtZmlsdGVyOiBibHVyKDEwcHgpO1xuICBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDAsIDI1NSwgNjUsIDAuMTgpO1xuICBib3gtc2hhZG93OiBpbnNldCAwIDFweCAwIHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOCk7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"]
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_2__.NgIf],
+    styles: [".glow-effect[_ngcontent-%COMP%] {\n    text-shadow: 0 0 8px rgba(72, 255, 72, 0.7);\n  }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMkNBQTJDO0VBQzdDIiwiZmlsZSI6ImhlYWRlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdsb3ctZWZmZWN0IHtcbiAgICB0ZXh0LXNoYWRvdzogMCAwIDhweCByZ2JhKDcyLCAyNTUsIDcyLCAwLjcpO1xuICB9XG4iXX0= */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29yZS9jb21wb25lbnRzL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLDJDQUEyQztFQUM3Qzs7QUFFRix3VkFBd1YiLCJzb3VyY2VzQ29udGVudCI6WyIuZ2xvdy1lZmZlY3Qge1xuICAgIHRleHQtc2hhZG93OiAwIDAgOHB4IHJnYmEoNzIsIDI1NSwgNzIsIDAuNyk7XG4gIH1cbiJdLCJzb3VyY2VSb290IjoiIn0= */"]
   });
 }
 
@@ -1193,11 +1189,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LayoutComponent: () => (/* binding */ LayoutComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 1699);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 1699);
 /* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/header/header.component */ 4072);
 /* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/footer/footer.component */ 6093);
 /* harmony import */ var _features_content_content_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../features/content/content.component */ 154);
-/* harmony import */ var _components_nav_nav_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/nav/nav.component */ 4007);
+/* harmony import */ var _components_matrix_rain_matrix_rain_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/matrix-rain/matrix-rain.component */ 6750);
+/* harmony import */ var _components_nav_nav_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/nav/nav.component */ 4007);
+
 
 
 
@@ -1207,24 +1205,27 @@ class LayoutComponent {
   static #_ = this.ɵfac = function LayoutComponent_Factory(t) {
     return new (t || LayoutComponent)();
   };
-  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
+  static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
     type: LayoutComponent,
     selectors: [["app-layout"]],
-    decls: 6,
+    decls: 10,
     vars: 0,
-    consts: [[1, "bg-base-200"], ["id", "hero"]],
+    consts: [[1, "relative", "min-h-screen", "bg-black"], [1, "fixed", "inset-0", "z-0"], [1, "absolute", "inset-0"], [1, "absolute", "inset-0", "bg-black/25", "pointer-events-none"], [1, "relative", "z-10"], ["id", "hero"]],
     template: function LayoutComponent_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "app-nav");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](3, "app-header");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](4, "app-content")(5, "app-footer");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](2, "app-matrix-rain", 2)(3, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](4, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](5, "app-nav");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](6, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](7, "app-header");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](8, "app-content")(9, "app-footer");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
       }
     },
-    dependencies: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_0__.HeaderComponent, _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_1__.FooterComponent, _features_content_content_component__WEBPACK_IMPORTED_MODULE_2__.ContentComponent, _components_nav_nav_component__WEBPACK_IMPORTED_MODULE_3__.NavComponent],
+    dependencies: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_0__.HeaderComponent, _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_1__.FooterComponent, _features_content_content_component__WEBPACK_IMPORTED_MODULE_2__.ContentComponent, _components_matrix_rain_matrix_rain_component__WEBPACK_IMPORTED_MODULE_3__.MatrixRainComponent, _components_nav_nav_component__WEBPACK_IMPORTED_MODULE_4__.NavComponent],
     styles: ["/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsYXlvdXQuY29tcG9uZW50LmNzcyJ9 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29yZS9sYXlvdXQvbGF5b3V0LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUNBLGdLQUFnSyIsInNvdXJjZVJvb3QiOiIifQ== */"]
   });
 }
@@ -1649,10 +1650,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function AboutComponent_div_30_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 26)(1, "div", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 28)(3, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 26)(1, "div", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 27)(3, "div", 28);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
   }
@@ -1719,7 +1720,7 @@ class AboutComponent {
     selectors: [["app-about"]],
     decls: 35,
     vars: 3,
-    consts: [["id", "about", 1, "relative", "bg-black", "border", "border-green-500/30", "rounded-lg", "overflow-hidden", "shadow-2xl"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "animate-pulse"], [1, "relative", "bg-black/90", "backdrop-blur-sm"], [1, "py-16"], [1, "container", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "flex", "flex-col", "lg:flex-row", "justify-between", "items-center"], [1, "w-full", "lg:w-1/2", "mb-8", "lg:mb-0"], [1, "flex", "items-center", "gap-3", "mb-6"], [1, "text-green-400", "font-mono", "text-lg", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "space-y-4"], [1, "border-l-2", "border-green-500/50", "pl-4"], [1, "text-green-500/70", "font-mono", "text-sm"], [1, "text-green-300", "text-justify", "text-xl", "font-mono", "leading-relaxed"], [1, "text-green-300", "text-justify", "font-mono", "leading-relaxed"], [1, "w-full", "lg:w-1/2", "flex", "justify-center", "lg:justify-end"], [1, "bg-black/50", "border", "border-green-500/30", "rounded-lg", "p-6", "backdrop-blur-sm"], [1, "flex", "items-center", "gap-2", "mb-4"], [1, "text-green-400", "font-mono"], [1, "w-2", "h-4", "bg-green-400", "animate-pulse"], [1, "grid", "grid-cols-5", "gap-4"], ["class", "group flex flex-col items-center transition-all duration-300 hover:scale-110 hover:bg-green-500/10 p-2 rounded border border-transparent hover:border-green-500/30", "style", "animation: matrixSkillFadeIn 0.6s ease-out both", 3, "animation-delay", 4, "ngFor", "ngForOf"], [1, "absolute", "top-2", "left-2", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/50"], [1, "absolute", "top-2", "right-2", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/50"], [1, "absolute", "bottom-2", "left-2", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/50"], [1, "absolute", "bottom-2", "right-2", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/50"], [1, "group", "flex", "flex-col", "items-center", "transition-all", "duration-300", "hover:scale-110", "hover:bg-green-500/10", "p-2", "rounded", "border", "border-transparent", "hover:border-green-500/30", 2, "animation", "matrixSkillFadeIn 0.6s ease-out both"], [1, "relative"], [1, "h-12", "w-12", "filter", "group-hover:brightness-125", "transition-all", "duration-300", 3, "src", "alt"], [1, "absolute", "inset-0", "bg-green-400/20", "rounded", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300", "blur-sm"], [1, "text-xs", "text-green-300", "mt-2", "font-mono"]],
+    consts: [["id", "about", 1, "relative", "liquid-glass", "rounded-2xl", "overflow-hidden", "shadow-2xl", "mx-4", "md:mx-8"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "animate-pulse"], [1, "relative"], [1, "py-16"], [1, "container", "mx-auto", "px-4", "sm:px-6", "lg:px-8"], [1, "flex", "flex-col", "lg:flex-row", "justify-between", "items-center"], [1, "w-full", "lg:w-1/2", "mb-8", "lg:mb-0"], [1, "flex", "items-center", "gap-3", "mb-6"], [1, "text-green-400", "font-mono", "text-lg", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "space-y-4"], [1, "border-l-2", "border-green-500/50", "pl-4"], [1, "text-green-500/70", "font-mono", "text-sm"], [1, "text-green-300", "text-justify", "text-xl", "font-mono", "leading-relaxed"], [1, "text-green-300", "text-justify", "font-mono", "leading-relaxed"], [1, "w-full", "lg:w-1/2", "flex", "justify-center", "lg:justify-end"], [1, "liquid-glass-inner", "rounded-xl", "p-6"], [1, "flex", "items-center", "gap-2", "mb-4"], [1, "text-green-400", "font-mono"], [1, "w-2", "h-4", "bg-green-400", "animate-pulse"], [1, "grid", "grid-cols-5", "gap-4"], ["class", "group flex flex-col items-center transition-all duration-300 hover:scale-110 hover:bg-green-500/10 p-2 rounded border border-transparent hover:border-green-500/30", "style", "animation: matrixSkillFadeIn 0.6s ease-out both", 3, "animation-delay", 4, "ngFor", "ngForOf"], [1, "absolute", "top-2", "left-2", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/50"], [1, "absolute", "top-2", "right-2", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/50"], [1, "absolute", "bottom-2", "left-2", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/50"], [1, "absolute", "bottom-2", "right-2", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/50"], [1, "group", "flex", "flex-col", "items-center", "transition-all", "duration-300", "hover:scale-110", "hover:bg-green-500/10", "p-2", "rounded", "border", "border-transparent", "hover:border-green-500/30", 2, "animation", "matrixSkillFadeIn 0.6s ease-out both"], [1, "h-12", "w-12", "filter", "group-hover:brightness-125", "transition-all", "duration-300", 3, "src", "alt"], [1, "absolute", "inset-0", "bg-green-400/20", "rounded", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300", "blur-sm"], [1, "text-xs", "text-green-300", "mt-2", "font-mono"]],
     template: function AboutComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -1790,39 +1791,39 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function ContactComponent_div_28_Template(rf, ctx) {
+function ContactComponent_div_25_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 32);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, "> name is required");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
   }
 }
-function ContactComponent_div_33_Template(rf, ctx) {
+function ContactComponent_div_30_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 32);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, "> valid email required");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
   }
 }
-function ContactComponent_div_38_Template(rf, ctx) {
+function ContactComponent_div_35_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 32);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, "> message required (min 10 chars)");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
   }
 }
-function ContactComponent_div_39_Template(rf, ctx) {
+function ContactComponent_div_36_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 36);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 33);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, " > Message transmitted successfully \u2713 ");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
   }
 }
-function ContactComponent_div_40_Template(rf, ctx) {
+function ContactComponent_div_37_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 37);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 34);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, " > Transmission failed. Try: ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "a", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "a", 35);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](3, "ZahraneRabhi@outlook.com");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
   }
@@ -1876,72 +1877,69 @@ class ContactComponent {
   static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
     type: ContactComponent,
     selectors: [["app-contact"]],
-    decls: 49,
+    decls: 46,
     vars: 10,
-    consts: [["id", "contact", 1, "relative", "bg-black", "py-20", "px-6", "overflow-hidden"], [1, "absolute", "inset-0"], [1, "absolute", "inset-0", "bg-gradient-to-b", "from-green-900/5", "via-black", "to-green-900/5"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 30% 30%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 70% 70%, #00ff0008 0%, transparent 50%)"], [1, "relative", "max-w-3xl", "mx-auto"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "justify-center", "p-3", "bg-green-500/10", "border", "border-green-500/30", "rounded-lg", "mb-6"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-8", "h-8", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], [1, "text-5xl", "md:text-6xl", "font-bold", "text-green-400", "mb-4", "font-mono", "tracking-wider"], [1, "inline-block", "animate-pulse"], [1, "text-green-300/80", "text-lg", "font-mono"], [1, "w-32", "h-0.5", "bg-green-400", "mx-auto", "mt-6", "animate-pulse"], [1, "bg-black/80", "border", "border-green-500/30", "rounded-lg", "overflow-hidden", "shadow-2xl", "backdrop-blur-sm", 3, "formGroup", "ngSubmit"], [1, "bg-black/60", "border-b", "border-green-500/30", "px-4", "py-2", "flex", "items-center", "gap-2"], [1, "w-3", "h-3", "rounded-full", "bg-red-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-yellow-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-green-500/70"], [1, "ml-4", "text-green-400", "font-mono", "text-sm"], [1, "p-8"], [1, "mb-6"], [1, "block", "text-green-500/70", "font-mono", "text-sm", "mb-2"], ["formControlName", "name", "type", "text", "placeholder", "John Doe", 1, "w-full", "bg-black/60", "border", "border-green-500/30", "rounded", "px-4", "py-3", "text-green-400", "font-mono", "text-sm", "placeholder-green-900", "focus:outline-none", "focus:border-green-400/60", "transition-colors", "duration-200"], ["class", "text-red-400 font-mono text-xs mt-1", 4, "ngIf"], ["formControlName", "email", "type", "email", "placeholder", "you@domain.com", 1, "w-full", "bg-black/60", "border", "border-green-500/30", "rounded", "px-4", "py-3", "text-green-400", "font-mono", "text-sm", "placeholder-green-900", "focus:outline-none", "focus:border-green-400/60", "transition-colors", "duration-200"], [1, "mb-8"], ["formControlName", "message", "rows", "5", "placeholder", "Your message...", 1, "w-full", "bg-black/60", "border", "border-green-500/30", "rounded", "px-4", "py-3", "text-green-400", "font-mono", "text-sm", "placeholder-green-900", "focus:outline-none", "focus:border-green-400/60", "transition-colors", "duration-200", "resize-none"], ["class", "mb-4 px-4 py-3 bg-green-500/10 border border-green-500/30 rounded font-mono text-green-400 text-sm", 4, "ngIf"], ["class", "mb-4 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded font-mono text-red-400 text-sm", 4, "ngIf"], ["type", "submit", 1, "w-full", "group", "inline-flex", "items-center", "justify-center", "gap-3", "px-8", "py-4", "bg-black", "border", "border-green-500/30", "text-green-400", "font-mono", "text-lg", "rounded", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", "disabled:opacity-50", "disabled:cursor-not-allowed", 3, "disabled"], [1, "w-3", "h-5", "bg-green-400"], [1, "absolute", "top-2", "left-2", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/30"], [1, "absolute", "top-2", "right-2", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/30"], [1, "absolute", "bottom-2", "left-2", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/30"], [1, "absolute", "bottom-2", "right-2", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/30"], [1, "text-red-400", "font-mono", "text-xs", "mt-1"], [1, "mb-4", "px-4", "py-3", "bg-green-500/10", "border", "border-green-500/30", "rounded", "font-mono", "text-green-400", "text-sm"], [1, "mb-4", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["href", "mailto:ZahraneRabhi@outlook.com", 1, "underline", "hover:text-red-300"]],
+    consts: [["id", "contact", 1, "relative", "py-20", "px-6", "overflow-hidden"], [1, "relative", "max-w-3xl", "mx-auto"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "justify-center", "p-3", "bg-green-500/10", "border", "border-green-500/30", "rounded-lg", "mb-6"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-8", "h-8", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"], [1, "text-5xl", "md:text-6xl", "font-bold", "text-green-400", "mb-4", "font-mono", "tracking-wider"], [1, "inline-block", "animate-pulse"], [1, "text-green-300/80", "text-lg", "font-mono"], [1, "w-32", "h-0.5", "bg-green-400", "mx-auto", "mt-6", "animate-pulse"], [1, "liquid-glass", "rounded-2xl", "overflow-hidden", "shadow-2xl", "relative", 3, "formGroup", "ngSubmit"], [1, "liquid-glass-bar", "px-4", "py-2", "flex", "items-center", "gap-2"], [1, "w-3", "h-3", "rounded-full", "bg-red-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-yellow-500/70"], [1, "w-3", "h-3", "rounded-full", "bg-green-500/70"], [1, "ml-4", "text-green-400", "font-mono", "text-sm"], [1, "p-8"], [1, "mb-6"], [1, "block", "text-green-500/70", "font-mono", "text-sm", "mb-2"], ["formControlName", "name", "type", "text", "placeholder", "John Doe", 1, "w-full", "liquid-glass-inner", "rounded-lg", "px-4", "py-3", "text-green-400", "font-mono", "text-sm", "placeholder-green-900", "focus:outline-none", "focus:border-green-400/60", "transition-colors", "duration-200"], ["class", "text-red-400 font-mono text-xs mt-1", 4, "ngIf"], ["formControlName", "email", "type", "email", "placeholder", "you@domain.com", 1, "w-full", "liquid-glass-inner", "rounded-lg", "px-4", "py-3", "text-green-400", "font-mono", "text-sm", "placeholder-green-900", "focus:outline-none", "focus:border-green-400/60", "transition-colors", "duration-200"], [1, "mb-8"], ["formControlName", "message", "rows", "5", "placeholder", "Your message...", 1, "w-full", "liquid-glass-inner", "rounded-lg", "px-4", "py-3", "text-green-400", "font-mono", "text-sm", "placeholder-green-900", "focus:outline-none", "focus:border-green-400/60", "transition-colors", "duration-200", "resize-none"], ["class", "mb-4 px-4 py-3 bg-green-500/10 border border-green-500/30 rounded font-mono text-green-400 text-sm", 4, "ngIf"], ["class", "mb-4 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded font-mono text-red-400 text-sm", 4, "ngIf"], ["type", "submit", 1, "w-full", "group", "inline-flex", "items-center", "justify-center", "gap-3", "px-8", "py-4", "bg-black", "border", "border-green-500/30", "text-green-400", "font-mono", "text-lg", "rounded", "hover:bg-green-500/10", "hover:border-green-400/60", "transition-all", "duration-300", "disabled:opacity-50", "disabled:cursor-not-allowed", 3, "disabled"], [1, "w-3", "h-5", "bg-green-400"], [1, "absolute", "top-2", "left-2", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/30"], [1, "absolute", "top-2", "right-2", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/30"], [1, "absolute", "bottom-2", "left-2", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/30"], [1, "absolute", "bottom-2", "right-2", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/30"], [1, "text-red-400", "font-mono", "text-xs", "mt-1"], [1, "mb-4", "px-4", "py-3", "bg-green-500/10", "border", "border-green-500/30", "rounded", "font-mono", "text-green-400", "text-sm"], [1, "mb-4", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["href", "mailto:ZahraneRabhi@outlook.com", 1, "underline", "hover:text-red-300"]],
     template: function ContactComponent_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "div", 2)(3, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 4)(5, "div", 5)(6, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnamespaceSVG"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](7, "svg", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](8, "path", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "svg", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](5, "path", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnamespaceHTML"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](9, "h2", 9)(10, "span", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](11, ">");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "h2", 6)(7, "span", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](8, ">");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](12, " CONTACT.EXE ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](9, " CONTACT.EXE ");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](13, "p", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](14, " >> Initialize connection protocol ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](10, "p", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](11, " >> Initialize connection protocol ");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](15, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](12, "div", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](16, "form", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("ngSubmit", function ContactComponent_Template_form_ngSubmit_16_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](13, "form", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("ngSubmit", function ContactComponent_Template_form_ngSubmit_13_listener() {
           return ctx.send();
         });
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](17, "div", 14);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](18, "div", 15)(19, "div", 16)(20, "div", 17);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](21, "span", 18);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](22, "contact.sys");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](14, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](15, "div", 12)(16, "div", 13)(17, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](18, "span", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](19, "contact.sys");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](23, "div", 19)(24, "div", 20)(25, "label", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](26, "// from_name");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "div", 16)(21, "div", 17)(22, "label", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](23, "// from_name");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](27, "input", 22);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](28, ContactComponent_div_28_Template, 2, 0, "div", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](24, "input", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](25, ContactComponent_div_25_Template, 2, 0, "div", 20);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](29, "div", 20)(30, "label", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](31, "// from_email");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](26, "div", 17)(27, "label", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](28, "// from_email");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](32, "input", 24);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](33, ContactComponent_div_33_Template, 2, 0, "div", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](29, "input", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](30, ContactComponent_div_30_Template, 2, 0, "div", 20);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](34, "div", 25)(35, "label", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](36, "// message");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](31, "div", 22)(32, "label", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](33, "// message");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](37, "textarea", 26);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](38, ContactComponent_div_38_Template, 2, 0, "div", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](34, "textarea", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](35, ContactComponent_div_35_Template, 2, 0, "div", 20);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](39, ContactComponent_div_39_Template, 2, 0, "div", 27);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](40, ContactComponent_div_40_Template, 4, 0, "div", 28);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](41, "button", 29)(42, "span");
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](43);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](36, ContactComponent_div_36_Template, 2, 0, "div", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](37, ContactComponent_div_37_Template, 4, 0, "div", 25);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](38, "button", 26)(39, "span");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](40);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](44, "div", 30);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](41, "div", 27);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](45, "div", 31)(46, "div", 32)(47, "div", 33)(48, "div", 34);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](42, "div", 28)(43, "div", 29)(44, "div", 30)(45, "div", 31);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
       }
       if (rf & 2) {
         let tmp_1_0;
         let tmp_2_0;
         let tmp_3_0;
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](13);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("formGroup", ctx.form);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](12);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ((tmp_1_0 = ctx.form.get("name")) == null ? null : tmp_1_0.invalid) && ((tmp_1_0 = ctx.form.get("name")) == null ? null : tmp_1_0.touched));
@@ -1997,7 +1995,7 @@ class ContentComponent {
     selectors: [["app-content"]],
     decls: 44,
     vars: 0,
-    consts: [[1, "relative", "py-12"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], [1, "w-full", "max-w-4xl", "h-px", "bg-gradient-to-r", "from-transparent", "via-green-500/30", "to-transparent"], [1, "relative", "flex", "justify-center"], [1, "bg-black", "px-4", "text-green-400/60", "font-mono", "text-sm"], [1, "animate-pulse"]],
+    consts: [[1, "relative", "py-12"], [1, "absolute", "inset-0", "flex", "items-center", "justify-center"], [1, "w-full", "max-w-4xl", "h-px", "bg-gradient-to-r", "from-transparent", "via-green-500/30", "to-transparent"], [1, "relative", "flex", "justify-center"], [1, "bg-black/50", "backdrop-blur-sm", "rounded", "px-4", "text-green-400/60", "font-mono", "text-sm"], [1, "animate-pulse"]],
     template: function ContentComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
@@ -2313,7 +2311,7 @@ class GithubStatsComponent {
     selectors: [["app-github-stats"]],
     decls: 16,
     vars: 3,
-    consts: [["id", "stats", 1, "relative", "bg-black", "py-16", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-20"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 20% 20%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 80% 80%, #00ff0008 0%, transparent 50%)"], [1, "relative"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "gap-3", "mb-4"], [1, "text-green-400", "font-mono", "text-xl", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-sm"], ["class", "flex flex-col items-center justify-center py-16 gap-4", 4, "ngIf"], ["class", "text-center py-8", 4, "ngIf"], ["class", "flex justify-center items-center", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "justify-center", "py-16", "gap-4"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "w-8", "h-8", "border-2", "border-green-400", "border-t-transparent", "rounded-full", "animate-spin"], [1, "text-center", "py-8"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"], [1, "flex", "justify-center", "items-center"], [1, "w-full", "max-w-6xl", "px-6"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-4", "gap-6"], [1, "group", "relative", "bg-black/80", "border", "border-green-500/30", "rounded-lg", "p-6", "backdrop-blur-sm", "hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "text-center"], [1, "flex", "justify-center", "mb-3"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-10", "h-10", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-1"], [1, "text-3xl", "font-bold", "text-green-400", "font-mono"], [1, "text-green-300/60", "font-mono", "text-xs", "mt-1"], [1, "absolute", "top-1", "left-1", "w-3", "h-3", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-1", "right-1", "w-3", "h-3", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-10", "h-10", "text-green-400"], ["points", "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"], ["cx", "12", "cy", "12", "r", "3"], ["x1", "3", "y1", "12", "x2", "9", "y2", "12"], ["x1", "15", "y1", "12", "x2", "21", "y2", "12"], [1, "w-12", "h-12", "rounded-full", "border-2", "border-green-400", "overflow-hidden", "bg-green-500/10"], ["alt", "GitHub avatar", "class", "w-full h-full object-cover", 3, "src", 4, "ngIf"], [1, "absolute", "-top-1", "-right-1", "w-4", "h-4", "bg-green-400", "rounded-full", "animate-pulse", "border-2", "border-black"], [1, "mt-8", "flex", "flex-col", "sm:flex-row", "items-center", "justify-center", "gap-3"], ["class", "inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70", 4, "ngIf"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-1.5", "bg-black/60", "border", "border-green-500/30", "rounded", "text-green-400/70", "hover:text-green-400", "hover:bg-green-500/10", "transition-all", "duration-300", "font-mono", "text-xs", "disabled:opacity-40", "disabled:cursor-not-allowed", 3, "disabled", "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"], ["alt", "GitHub avatar", 1, "w-full", "h-full", "object-cover", 3, "src"], [1, "inline-flex", "items-center", "gap-2", "px-3", "py-1.5", "bg-green-500/10", "border", "border-green-500/20", "rounded", "font-mono", "text-xs", "text-green-400/70"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"], [1, "w-2", "h-2", "bg-green-400", "rounded-full", "animate-pulse"]],
+    consts: [["id", "stats", 1, "relative", "py-16", "overflow-hidden"], [1, "absolute", "inset-0", "opacity-20"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 20% 20%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 80% 80%, #00ff0008 0%, transparent 50%)"], [1, "relative"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "gap-3", "mb-4"], [1, "text-green-400", "font-mono", "text-xl", "animate-pulse"], [1, "text-4xl", "font-bold", "text-green-400", "font-mono", "tracking-wider"], [1, "w-3", "h-5", "bg-green-400", "animate-pulse"], [1, "text-green-300/70", "font-mono", "text-sm"], ["class", "flex flex-col items-center justify-center py-16 gap-4", 4, "ngIf"], ["class", "text-center py-8", 4, "ngIf"], ["class", "flex justify-center items-center", 4, "ngIf"], [1, "flex", "flex-col", "items-center", "justify-center", "py-16", "gap-4"], [1, "text-green-400", "font-mono", "text-sm", "animate-pulse"], [1, "w-8", "h-8", "border-2", "border-green-400", "border-t-transparent", "rounded-full", "animate-spin"], [1, "text-center", "py-8"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-3", "bg-red-500/10", "border", "border-red-500/30", "rounded", "font-mono", "text-red-400", "text-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-4", "h-4", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"], [1, "flex", "justify-center", "items-center"], [1, "w-full", "max-w-6xl", "px-6"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-4", "gap-6"], [1, "group", "relative", "liquid-glass", "rounded-2xl", "p-6", "hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "text-center"], [1, "flex", "justify-center", "mb-3"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-10", "h-10", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"], [1, "text-green-500/70", "font-mono", "text-sm", "mb-1"], [1, "text-3xl", "font-bold", "text-green-400", "font-mono"], [1, "text-green-300/60", "font-mono", "text-xs", "mt-1"], [1, "absolute", "top-1", "left-1", "w-3", "h-3", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-1", "right-1", "w-3", "h-3", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-10", "h-10", "text-green-400"], ["points", "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"], ["cx", "12", "cy", "12", "r", "3"], ["x1", "3", "y1", "12", "x2", "9", "y2", "12"], ["x1", "15", "y1", "12", "x2", "21", "y2", "12"], [1, "w-12", "h-12", "rounded-full", "border-2", "border-green-400", "overflow-hidden", "bg-green-500/10"], ["alt", "GitHub avatar", "class", "w-full h-full object-cover", 3, "src", 4, "ngIf"], [1, "absolute", "-top-1", "-right-1", "w-4", "h-4", "bg-green-400", "rounded-full", "animate-pulse", "border-2", "border-black"], [1, "mt-8", "flex", "flex-col", "sm:flex-row", "items-center", "justify-center", "gap-3"], ["class", "inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded font-mono text-xs text-green-400/70", 4, "ngIf"], [1, "inline-flex", "items-center", "gap-2", "px-4", "py-1.5", "bg-black/60", "border", "border-green-500/30", "rounded", "text-green-400/70", "hover:text-green-400", "hover:bg-green-500/10", "transition-all", "duration-300", "font-mono", "text-xs", "disabled:opacity-40", "disabled:cursor-not-allowed", 3, "disabled", "click"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"], ["alt", "GitHub avatar", 1, "w-full", "h-full", "object-cover", 3, "src"], [1, "inline-flex", "items-center", "gap-2", "px-3", "py-1.5", "bg-green-500/10", "border", "border-green-500/20", "rounded", "font-mono", "text-xs", "text-green-400/70"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", "stroke-width", "2", 1, "w-3", "h-3", "flex-shrink-0"], ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"], [1, "w-2", "h-2", "bg-green-400", "rounded-full", "animate-pulse"]],
     template: function GithubStatsComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
@@ -2371,11 +2369,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function ProjectsComponent_button_17_Template(rf, ctx) {
+function ProjectsComponent_button_14_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "button", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function ProjectsComponent_button_17_Template_button_click_0_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "button", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function ProjectsComponent_button_14_Template_button_click_0_listener() {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r4);
       const filter_r2 = restoredCtx.$implicit;
       const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
@@ -2392,14 +2390,14 @@ function ProjectsComponent_button_17_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", filter_r2 === "All" ? "> ./all" : "> " + filter_r2.toLowerCase(), " ");
   }
 }
-function ProjectsComponent_div_19_Template(rf, ctx) {
+function ProjectsComponent_div_16_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 22)(1, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "div", 24)(3, "div", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](5, "app-card", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 19)(1, "div", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "div", 21)(3, "div", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](5, "app-card", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](6, "div", 28)(7, "div", 29)(8, "div", 30)(9, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](6, "div", 25)(7, "div", 26)(8, "div", 27)(9, "div", 28);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
   }
   if (rf & 2) {
@@ -2445,44 +2443,41 @@ class ProjectsComponent {
   static #_2 = this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
     type: ProjectsComponent,
     selectors: [["app-projects"]],
-    decls: 25,
+    decls: 22,
     vars: 2,
-    consts: [["id", "projects", 1, "relative", "bg-black", "py-20", "px-6", "overflow-hidden"], [1, "absolute", "inset-0"], [1, "absolute", "inset-0", "bg-gradient-to-b", "from-green-900/5", "via-black", "to-green-900/5"], [1, "absolute", "inset-0", 2, "background-image", "radial-gradient(circle at 25% 25%, #00ff0010 0%, transparent 50%), radial-gradient(circle at 75% 75%, #00ff0008 0%, transparent 50%)"], [1, "relative", "max-w-7xl", "mx-auto"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "justify-center", "p-3", "bg-green-500/10", "border", "border-green-500/30", "rounded-lg", "mb-6", "backdrop-blur-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-8", "h-8", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"], [1, "text-5xl", "md:text-6xl", "font-bold", "text-green-400", "mb-4", "font-mono", "tracking-wider"], [1, "inline-block", "animate-pulse"], [1, "text-green-300/80", "text-lg", "max-w-2xl", "mx-auto", "leading-relaxed", "font-mono"], [1, "w-32", "h-0.5", "bg-green-400", "mx-auto", "mt-6", "animate-pulse"], [1, "flex", "flex-wrap", "justify-center", "gap-3", "mb-12"], ["class", "px-4 py-2 font-mono text-sm rounded border transition-all duration-200", 3, "ngClass", "click", 4, "ngFor", "ngForOf"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "xl:grid-cols-3", "gap-8", "lg:gap-10"], ["class", "h-full group relative transform transition-all duration-300 hover:scale-105", "style", "animation: matrixFadeIn 1s ease-out both", 3, "animation-delay", 4, "ngFor", "ngForOf"], [1, "text-center", "mt-20"], [1, "inline-flex", "items-center", "gap-3", "px-6", "py-3", "bg-black/50", "border", "border-green-500/30", "rounded", "text-green-400", "hover:border-green-400/60", "hover:bg-green-500/10", "transition-all", "duration-300", "cursor-pointer", "group", "font-mono"], [1, "text-sm"], [1, "w-2", "h-4", "bg-green-400", "animate-pulse"], [1, "px-4", "py-2", "font-mono", "text-sm", "rounded", "border", "transition-all", "duration-200", 3, "ngClass", "click"], [1, "h-full", "group", "relative", "transform", "transition-all", "duration-300", "hover:scale-105", 2, "animation", "matrixFadeIn 1s ease-out both"], [1, "h-full", "relative", "bg-black/80", "border", "border-green-500/30", "rounded-lg", "overflow-hidden", "shadow-2xl", "group-hover:border-green-400/60", "transition-all", "duration-300", "backdrop-blur-sm"], [1, "absolute", "inset-0", "bg-green-400/5", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "relative", "z-10", "h-full"], [3, "project"], [1, "absolute", "top-2", "left-2", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-2", "right-2", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "bottom-2", "left-2", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "bottom-2", "right-2", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"]],
+    consts: [["id", "projects", 1, "relative", "py-20", "px-6", "overflow-hidden"], [1, "relative", "max-w-7xl", "mx-auto"], [1, "text-center", "mb-16"], [1, "inline-flex", "items-center", "justify-center", "p-3", "bg-green-500/10", "border", "border-green-500/30", "rounded-lg", "mb-6", "backdrop-blur-sm"], ["fill", "none", "stroke", "currentColor", "viewBox", "0 0 24 24", 1, "w-8", "h-8", "text-green-400"], ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"], [1, "text-5xl", "md:text-6xl", "font-bold", "text-green-400", "mb-4", "font-mono", "tracking-wider"], [1, "inline-block", "animate-pulse"], [1, "text-green-300/80", "text-lg", "max-w-2xl", "mx-auto", "leading-relaxed", "font-mono"], [1, "w-32", "h-0.5", "bg-green-400", "mx-auto", "mt-6", "animate-pulse"], [1, "flex", "flex-wrap", "justify-center", "gap-3", "mb-12"], ["class", "px-4 py-2 font-mono text-sm rounded border transition-all duration-200", 3, "ngClass", "click", 4, "ngFor", "ngForOf"], [1, "grid", "grid-cols-1", "md:grid-cols-2", "xl:grid-cols-3", "gap-8", "lg:gap-10"], ["class", "h-full group relative transform transition-all duration-300 hover:scale-105", "style", "animation: matrixFadeIn 1s ease-out both", 3, "animation-delay", 4, "ngFor", "ngForOf"], [1, "text-center", "mt-20"], [1, "inline-flex", "items-center", "gap-3", "px-6", "py-3", "bg-black/50", "border", "border-green-500/30", "rounded", "text-green-400", "hover:border-green-400/60", "hover:bg-green-500/10", "transition-all", "duration-300", "cursor-pointer", "group", "font-mono"], [1, "text-sm"], [1, "w-2", "h-4", "bg-green-400", "animate-pulse"], [1, "px-4", "py-2", "font-mono", "text-sm", "rounded", "border", "transition-all", "duration-200", 3, "ngClass", "click"], [1, "h-full", "group", "relative", "transform", "transition-all", "duration-300", "hover:scale-105", 2, "animation", "matrixFadeIn 1s ease-out both"], [1, "h-full", "relative", "liquid-glass", "rounded-2xl", "overflow-hidden", "shadow-2xl", "group-hover:border-green-400/60", "transition-all", "duration-300"], [1, "absolute", "inset-0", "bg-green-400/5", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-0", "left-0", "w-full", "h-0.5", "bg-gradient-to-r", "from-transparent", "via-green-400", "to-transparent", "opacity-0", "group-hover:opacity-100", "group-hover:animate-pulse", "transition-opacity", "duration-300"], [1, "relative", "z-10", "h-full"], [3, "project"], [1, "absolute", "top-2", "left-2", "w-4", "h-4", "border-l-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "top-2", "right-2", "w-4", "h-4", "border-r-2", "border-t-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "bottom-2", "left-2", "w-4", "h-4", "border-l-2", "border-b-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"], [1, "absolute", "bottom-2", "right-2", "w-4", "h-4", "border-r-2", "border-b-2", "border-green-400/50", "opacity-0", "group-hover:opacity-100", "transition-opacity", "duration-300"]],
     template: function ProjectsComponent_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "div", 2)(3, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 4)(5, "div", 5)(6, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnamespaceSVG"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](7, "svg", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](8, "path", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "svg", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](5, "path", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnamespaceHTML"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](9, "h2", 9)(10, "span", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](11, ">");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "h2", 6)(7, "span", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](8, ">");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](12, " PROJECTS.EXE ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](9, " PROJECTS.EXE ");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](13, "p", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](14, " >> Executing digital solutions... Building the matrix of innovation ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](10, "p", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](11, " >> Executing digital solutions... Building the matrix of innovation ");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](15, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](12, "div", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](16, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](17, ProjectsComponent_button_17_Template, 2, 2, "button", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](13, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](14, ProjectsComponent_button_14_Template, 2, 2, "button", 11);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](18, "div", 15);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](19, ProjectsComponent_div_19_Template, 10, 3, "div", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](15, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](16, ProjectsComponent_div_16_Template, 10, 3, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "div", 17)(21, "div", 18)(22, "span", 19);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](23, "> ./view_more_projects");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](17, "div", 14)(18, "div", 15)(19, "span", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](20, "> ./view_more_projects");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](24, "span", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](21, "span", 17);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()()();
       }
       if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](14);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.filters);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.filteredProjects);

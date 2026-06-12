@@ -2,3 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* iOS liquid-glass material — used on cards site-wide.
+   Needs the fixed matrix rain behind it to read as glass. */
+.liquid-glass {
+  background: linear-gradient(
+    160deg,
+    rgba(0, 255, 65, 0.07) 0%,
+    rgba(0, 0, 0, 0.30) 35%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  border: 1px solid rgba(0, 255, 65, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    inset 0 0 40px rgba(0, 255, 65, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 0 0 0.5px rgba(255, 255, 255, 0.06);
+}
+
+.liquid-glass-bar {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-bottom: 1px solid rgba(0, 255, 65, 0.18);
+}
+
+.liquid-glass-inner {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 65, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
